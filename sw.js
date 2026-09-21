@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deutschmeister-pro-v1';
+const CACHE_NAME = 'deutschmeister-pro-v2';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -17,7 +17,9 @@ const CORE_ASSETS = [
   '/assets/js/daily_quests.js',
   '/assets/js/ai_tandem.js',
   '/assets/images/triple_a_logo.jpg',
-  '/assets/images/app_icon.svg'
+  '/assets/images/app_icon.svg',
+  '/assets/images/app_icon_192.png',
+  '/assets/images/app_icon_512.png'
 ];
 
 // Install Event: Pre-cache core files

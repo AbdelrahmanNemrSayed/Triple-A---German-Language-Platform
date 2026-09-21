@@ -173,7 +173,51 @@ export class PWAInstaller {
   }
 
   openGeneralGuideModal() {
-    alert('لتثبيت التطبيق على جهازك: افتح قائمة المتصفح (⋮ أو ⎋) ثم اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".');
+    let modal = document.getElementById('pwa-general-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'pwa-general-modal';
+      modal.className = 'pwa-guide-modal-overlay';
+      modal.innerHTML = `
+        <div class="pwa-guide-modal-card">
+          <div class="pwa-guide-header">
+            <div class="pwa-guide-icon-badge">
+              <img src="./assets/images/app_icon_192.png" alt="App Icon" width="48" height="48" style="border-radius: 12px;" />
+            </div>
+            <div class="pwa-guide-title-box">
+              <h3>تثبيت تطبيق Triple A على هاتفك</h3>
+              <p>استمتع بتشغيل فوري كتطبيق هاتف أصلي بدون إنترنت</p>
+            </div>
+            <button class="pwa-guide-close-btn" id="btn-close-pwa-gen">&times;</button>
+          </div>
+          <div class="pwa-guide-steps">
+            <div class="pwa-step-item">
+              <span class="pwa-step-number">1</span>
+              <span class="pwa-step-text">اضغط على زر القائمة <strong>(⋮ أو النقاط الثلاث)</strong> في زاوية المتصفح أعلى الشاشة.</span>
+            </div>
+            <div class="pwa-step-item">
+              <span class="pwa-step-number">2</span>
+              <span class="pwa-step-text">اختر من القائمة <strong>"تثبيت التطبيق" (Install App)</strong> أو <strong>"إضافة إلى الشاشة الرئيسية" (Add to Home screen)</strong>.</span>
+            </div>
+            <div class="pwa-step-item">
+              <span class="pwa-step-number">3</span>
+              <span class="pwa-step-text">اضغط على <strong>"تثبيت" (Install)</strong>، وسيتم تنزيل التطبيق فوراً ليعمل بكامل ميزاته!</span>
+            </div>
+          </div>
+          <button class="pwa-guide-action-btn" id="btn-done-pwa-gen">فهمت الخطوات 👍</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const close = () => modal.classList.remove('open');
+      modal.querySelector('#btn-close-pwa-gen').addEventListener('click', close);
+      modal.querySelector('#btn-done-pwa-gen').addEventListener('click', close);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+      });
+    }
+
+    setTimeout(() => modal.classList.add('open'), 10);
   }
 
   showInstalledCelebration() {

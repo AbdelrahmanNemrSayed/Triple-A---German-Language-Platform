@@ -2,7 +2,8 @@
   "name": "Triple A | منصة DeutschMeister Pro",
   "short_name": "DeutschMeister",
   "description": "منصة تعليمية متطورة وشاملة لإتقان اللغة الألمانية وسوق العمل، برعاية وتطوير Triple A.",
-  "start_url": "/",
+  "id": "/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -13,10 +14,22 @@
   "categories": ["education", "productivity"],
   "icons": [
     {
-      "src": "/assets/images/app_icon.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
+      "src": "/assets/images/app_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/app_icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
       "src": "/assets/images/triple_a_logo.jpg",
@@ -31,28 +44,28 @@
       "short_name": "الأدوات",
       "description": "لعبة وتحدي أدوات التعريف السريع",
       "url": "/#view-articles",
-      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "مهمة اليوم اليومية",
       "short_name": "المهمة",
       "description": "حل مهام اليوم واكسب +50 XP",
       "url": "/#quest",
-      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "شريك المحادثة الذكي",
       "short_name": "المحادثة",
       "description": "تحدث بالألمانية مع الذكاء الاصطناعي",
       "url": "/#view-tandem",
-      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "الساعة والأرقام",
       "short_name": "الساعة",
       "description": "مدرب قراءة الوقت والأرقام الألمانية",
       "url": "/#view-time",
-      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }
