@@ -6894,4 +6894,554 @@
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   PWA & Mobile UI/UX Comprehensive Enhancements
+   ========================================================================== */
+
+/* 1. PWA Install Action in Topbar */
+.topbar-pwa-install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.18), rgba(56, 189, 248, 0.12));
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0284c7;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.12);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .topbar-pwa-install-btn {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.18));
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+}
+
+.topbar-pwa-install-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+}
+
+.pwa-btn-icon {
+  font-size: 1.05rem;
+  display: inline-block;
+  animation: pwaBounce 2.5s infinite;
+}
+
+@keyframes pwaBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px) scale(1.1); }
+}
+
+.pwa-hidden {
+  display: none !important;
+}
+
+/* 2. Highlighted Quest Item in Mobile Bottom Nav */
+.mob-nav-highlight-quest {
+  position: relative;
+  transform: translateY(-8px);
+}
+
+.mob-quest-glow-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #eab308);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.55), 0 0 0 4px rgba(255, 255, 255, 0.85);
+  transition: all 0.2s ease;
+  animation: questFabPulse 2.4s infinite ease-in-out;
+}
+
+[data-theme="dark"] .mob-quest-glow-icon {
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.65), 0 0 0 4px rgba(15, 23, 42, 0.9);
+}
+
+.mob-nav-highlight-quest:active .mob-quest-glow-icon {
+  transform: scale(0.92);
+}
+
+@keyframes questFabPulse {
+  0%, 100% { box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45), 0 0 0 4px rgba(255, 255, 255, 0.85); }
+  50% { box-shadow: 0 8px 24px rgba(245, 158, 11, 0.75), 0 0 0 6px rgba(245, 158, 11, 0.25); }
+}
+
+/* 3. Mobile More Sections Bottom Sheet (Native Feel) */
+.mobile-more-sheet-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2800;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-more-sheet-overlay.open {
+  display: flex;
+  opacity: 1;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mobile-more-sheet-card {
+  width: 100%;
+  max-width: 600px;
+  max-height: 86vh;
+  background: var(--bg-card);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 12px));
+  box-sizing: border-box;
+}
+
+.mobile-more-sheet-overlay.open .mobile-more-sheet-card {
+  transform: translateY(0);
+}
+
+.sheet-drag-handle {
+  width: 44px;
+  height: 5px;
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+  margin: 0 auto 0.75rem;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1rem;
+}
+
+.sheet-title-wrap h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.sheet-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #0284c7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+[data-theme="dark"] .sheet-badge {
+  color: #38bdf8;
+}
+
+.sheet-close-btn {
+  background: rgba(148, 163, 184, 0.15);
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sheet-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* PWA Banner inside Sheet */
+.sheet-pwa-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(168, 85, 247, 0.12));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sheet-pwa-banner:hover {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.25), rgba(168, 85, 247, 0.2));
+  border-color: #38bdf8;
+}
+
+.pwa-banner-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.pwa-banner-info {
+  flex: 1;
+}
+
+.pwa-banner-info h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pwa-banner-info p {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.btn-sheet-install {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.45rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sheet-sections-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(75vh - 120px);
+  padding-right: 0.25rem;
+}
+
+.sheet-group-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0.85rem 0 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.sheet-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 0.85rem 0.45rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.sheet-grid-item:hover,
+.sheet-grid-item:active {
+  background: rgba(2, 132, 199, 0.15);
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.grid-item-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.grid-item-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.grid-item-sub {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+  background: rgba(148, 163, 184, 0.15);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+}
+
+.grid-item-sub.hot {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  font-weight: 800;
+}
+
+.grid-item-sub.live {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  font-weight: 800;
+}
+
+/* 4. iOS Install Guide Modal */
+.pwa-guide-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 3000;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pwa-guide-modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.pwa-guide-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-card);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  padding: 1.5rem 1.25rem calc(1.75rem + env(safe-area-inset-bottom, 12px));
+  box-shadow: 0 -20px 45px rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-subtle);
+}
+
+.pwa-guide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.pwa-guide-title-box h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.pwa-guide-title-box p {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.pwa-guide-close-btn {
+  margin-left: auto;
+  background: rgba(148, 163, 184, 0.15);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.pwa-guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.pwa-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-hover);
+  border-radius: 14px;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.pwa-step-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0284c7;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pwa-step-text {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.pwa-guide-action-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.85rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+}
+
+/* 5. Celebration Toast */
+.pwa-celebration-toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 1px solid #10b981;
+  border-radius: 18px;
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  z-index: 3500;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 90vw;
+  color: #ffffff;
+}
+
+.pwa-celebration-toast.show {
+  top: calc(20px + env(safe-area-inset-top, 0px));
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.toast-icon {
+  font-size: 2rem;
+}
+
+.toast-content strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #10b981;
+}
+
+.toast-content p {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* 6. Mobile Touch & Input Ergonomics */
+@media (max-width: 768px) {
+  /* Prevent iOS zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Tandem Mobile Adjustment: stick input above bottom nav */
+  .tandem-chat-card {
+    height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+  }
+
+  .tandem-input-bar {
+    padding: 0.65rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .btn-tandem-voice {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn-tandem-send {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Analog clock responsive downscale */
+  .analog-clock-container {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .analog-clock-svg {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* Articles trainer big thumb targets on phone */
+  .article-choice-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .btn-article-choice {
+    padding: 1.15rem 1rem;
+    font-size: 1.35rem;
+  }
+
+  /* Topbar compact adjustments on narrow screens */
+  .topbar-pwa-install-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+  }
+
+  .topbar-current-view {
+    font-size: 0.95rem;
+    max-width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
 

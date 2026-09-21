@@ -21,16 +21,28 @@ function copyRecursive(src, dest) {
 }
 
 // 1. Target dist directory
-console.log('📦 Building static artifacts for Vercel...');
+console.log('📦 Building static artifacts for Vercel & PWA...');
 fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'index.html'), path.join(__dirname, 'dist', 'index.html'));
+if (fs.existsSync(path.join(__dirname, 'manifest.webmanifest'))) {
+  fs.copyFileSync(path.join(__dirname, 'manifest.webmanifest'), path.join(__dirname, 'dist', 'manifest.webmanifest'));
+}
+if (fs.existsSync(path.join(__dirname, 'sw.js'))) {
+  fs.copyFileSync(path.join(__dirname, 'sw.js'), path.join(__dirname, 'dist', 'sw.js'));
+}
 copyRecursive(path.join(__dirname, 'assets'), path.join(__dirname, 'dist', 'assets'));
 copyRecursive(path.join(__dirname, 'data'), path.join(__dirname, 'dist', 'data'));
 
 // 2. Also populate public directory just in case
 fs.mkdirSync(path.join(__dirname, 'public'), { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'index.html'), path.join(__dirname, 'public', 'index.html'));
+if (fs.existsSync(path.join(__dirname, 'manifest.webmanifest'))) {
+  fs.copyFileSync(path.join(__dirname, 'manifest.webmanifest'), path.join(__dirname, 'public', 'manifest.webmanifest'));
+}
+if (fs.existsSync(path.join(__dirname, 'sw.js'))) {
+  fs.copyFileSync(path.join(__dirname, 'sw.js'), path.join(__dirname, 'public', 'sw.js'));
+}
 copyRecursive(path.join(__dirname, 'assets'), path.join(__dirname, 'public', 'assets'));
 copyRecursive(path.join(__dirname, 'data'), path.join(__dirname, 'public', 'data'));
 
-console.log('✅ Static build complete! Both dist/ and public/ are populated.');
+console.log('✅ Static build complete! Both dist/ and public/ are populated with PWA files.');

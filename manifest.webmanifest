@@ -1,0 +1,58 @@
+{
+  "name": "Triple A | منصة DeutschMeister Pro",
+  "short_name": "DeutschMeister",
+  "description": "منصة تعليمية متطورة وشاملة لإتقان اللغة الألمانية وسوق العمل، برعاية وتطوير Triple A.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0284c7",
+  "dir": "rtl",
+  "lang": "ar",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/images/app_icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/triple_a_logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "تحدي der / die / das",
+      "short_name": "الأدوات",
+      "description": "لعبة وتحدي أدوات التعريف السريع",
+      "url": "/#view-articles",
+      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "مهمة اليوم اليومية",
+      "short_name": "المهمة",
+      "description": "حل مهام اليوم واكسب +50 XP",
+      "url": "/#quest",
+      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "شريك المحادثة الذكي",
+      "short_name": "المحادثة",
+      "description": "تحدث بالألمانية مع الذكاء الاصطناعي",
+      "url": "/#view-tandem",
+      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "الساعة والأرقام",
+      "short_name": "الساعة",
+      "description": "مدرب قراءة الوقت والأرقام الألمانية",
+      "url": "/#view-time",
+      "icons": [{ "src": "/assets/images/app_icon.svg", "sizes": "192x192" }]
+    }
+  ]
+}

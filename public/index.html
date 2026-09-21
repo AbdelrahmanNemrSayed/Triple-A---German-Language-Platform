@@ -2,7 +2,13 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DeutschMeister">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./assets/images/app_icon.svg">
   <meta name="description" content="منصة DeutschMeister Pro لتعلم مفردات وقواعد ونطق اللغة الألمانية للمستويات A1 و A2 و B1، ومسارات سوق العمل والوظائف (IT، خدمة العملاء، المجال الطبي، والمقابلات)، والمحادثات الواقعية، وتدريب النطق بالميكروفون، ومختبر بناء الجمل، والإيميلات المهنية.">
   <meta name="keywords" content="تعلم الألمانية, A1, A2, B1, ألماني للعمل, مصطلحات طبية ألماني, IT بالألماني, خدمة عملاء ألماني, محادثات ألماني, der die das, فلاش كارد ألماني, ميكروفون نطق ألماني">
   <meta name="author" content="Triple A">
@@ -14,7 +20,8 @@
   <meta property="og:type" content="website">
 
   <title>Triple A | منصة DeutschMeister Pro لتعليم الألمانية وسوق العمل</title>
-  <link rel="icon" type="image/jpeg" href="./assets/images/triple_a_logo.jpg">
+  <link rel="icon" type="image/svg+xml" href="./assets/images/app_icon.svg">
+  <link rel="alternate icon" type="image/jpeg" href="./assets/images/triple_a_logo.jpg">
 
   <!-- Google Fonts: Cairo & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -327,6 +334,12 @@
       </div>
 
       <div class="topbar-actions">
+        <!-- PWA Install Quick Action -->
+        <button class="topbar-pwa-install-btn btn-pwa-install-trigger pwa-visible" id="btn-pwa-install-topbar" title="تنزيل وتثبيت التطبيق على هاتفك">
+          <span class="pwa-btn-icon">📲</span>
+          <span class="pwa-btn-text">تثبيت التطبيق</span>
+        </button>
+
         <div class="topbar-gamification-widget">
           <button class="topbar-quest-pill" id="topbar-quest-pill" title="المهمة اليومية - اربح +50 XP">
             <span class="quest-pill-icon">⚡</span>
@@ -823,7 +836,7 @@
   </div> <!-- /.app-main-content -->
 </div> <!-- /.app-layout -->
 
-  <!-- Mobile Bottom Floating Navigation Bar -->
+  <!-- Mobile Bottom Floating Navigation Bar (Native App Ergonomics) -->
   <nav class="mobile-bottom-nav" aria-label="شريط التنقل السريع للهواتف">
     <button class="mobile-nav-item active" data-view="vocab" id="mob-nav-vocab">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -832,34 +845,169 @@
       </svg>
       <span>المفردات</span>
     </button>
-    <button class="mobile-nav-item" data-view="career" id="mob-nav-career">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-      </svg>
-      <span>العمل</span>
+    <button class="mobile-nav-item" data-view="articles" id="mob-nav-articles">
+      <i class="fa-solid fa-bolt" style="font-size: 1.15rem; color: #00f2fe;"></i>
+      <span>der/die/das</span>
     </button>
-    <button class="mobile-nav-item" data-view="dialogues" id="mob-nav-dialogues">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
-      <span>المحادثات</span>
+    <button class="mobile-nav-item mob-nav-highlight-quest" id="mob-nav-quest" title="مهمة اليوم">
+      <div class="mob-quest-glow-icon">⚡</div>
+      <span>مهمة اليوم</span>
     </button>
-    <button class="mobile-nav-item" data-view="speech" id="mob-nav-speech">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-      </svg>
-      <span>النطق 🎙️</span>
+    <button class="mobile-nav-item" data-view="tandem" id="mob-nav-tandem">
+      <i class="fa-solid fa-robot" style="font-size: 1.15rem; color: #38bdf8;"></i>
+      <span>المحادثة 🤖</span>
     </button>
-    <button class="mobile-nav-item" data-view="quiz" id="mob-nav-quiz">
+    <button class="mobile-nav-item" id="mob-nav-more" aria-label="عرض جميع الأقسام">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
-      <span>الاختبارات</span>
+      <span>المزيد ☰</span>
     </button>
   </nav>
+
+  <!-- Mobile More Sections Bottom Sheet (Native Bottom Drawer) -->
+  <div class="mobile-more-sheet-overlay" id="mobile-more-sheet" aria-hidden="true">
+    <div class="mobile-more-sheet-card">
+      <div class="sheet-drag-handle" id="sheet-drag-handle"></div>
+      
+      <div class="sheet-header">
+        <div class="sheet-title-wrap">
+          <span class="sheet-badge">Triple A PRO</span>
+          <h3>جميع أقسام وأدوات المنصة</h3>
+        </div>
+        <button class="sheet-close-btn" id="btn-close-more-sheet" aria-label="إغلاق">&times;</button>
+      </div>
+
+      <!-- PWA Install Banner inside Mobile Sheet -->
+      <div class="sheet-pwa-banner btn-pwa-install-trigger pwa-visible" id="sheet-pwa-install-banner">
+        <div class="pwa-banner-icon">📲</div>
+        <div class="pwa-banner-info">
+          <h4>تثبيت التطبيق على هاتفك</h4>
+          <p>أضف المنصة لشاشتك الرئيسية واستخدمها كتطبيق سريع ومستقل!</p>
+        </div>
+        <button class="btn-sheet-install">تثبيت الآن</button>
+      </div>
+
+      <div class="sheet-sections-scroll">
+        <!-- 1. المفردات وتصريف الأفعال -->
+        <div class="sheet-group-label">المفردات وتصريف الأفعال</div>
+        <div class="sheet-grid">
+          <button class="sheet-grid-item nav-tab-btn" data-view="vocab">
+            <span class="grid-item-icon">📖</span>
+            <span class="grid-item-name">مستكشف المفردات</span>
+            <span class="grid-item-sub">A1 - B1</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="articles">
+            <span class="grid-item-icon">🎯</span>
+            <span class="grid-item-name">تحدي der/die/das</span>
+            <span class="grid-item-sub hot">سرعة 🔥</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="verbs">
+            <span class="grid-item-icon">⚡</span>
+            <span class="grid-item-name">مصرف الأفعال</span>
+            <span class="grid-item-sub">3 أزمنة</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="prepositions">
+            <span class="grid-item-icon">🔄</span>
+            <span class="grid-item-name">حروف الجر</span>
+            <span class="grid-item-sub">Kasus</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="grammar">
+            <span class="grid-item-icon">⚖️</span>
+            <span class="grid-item-name">بنك القواعد</span>
+            <span class="grid-item-sub">شامل</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="compounds">
+            <span class="grid-item-icon">🧩</span>
+            <span class="grid-item-name">تفكيك الكلمات</span>
+            <span class="grid-item-sub">Komposita</span>
+          </button>
+        </div>
+
+        <!-- 2. المهارات والتواصل وسوق العمل -->
+        <div class="sheet-group-label">المهارات وسوق العمل</div>
+        <div class="sheet-grid">
+          <button class="sheet-grid-item nav-tab-btn" data-view="career">
+            <span class="grid-item-icon">💼</span>
+            <span class="grid-item-name">مسارات المهن</span>
+            <span class="grid-item-sub">IT وطب</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="dialogues">
+            <span class="grid-item-icon">💬</span>
+            <span class="grid-item-name">المحادثات</span>
+            <span class="grid-item-sub">واقعية</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="speech">
+            <span class="grid-item-icon">🎙️</span>
+            <span class="grid-item-name">تدريب النطق</span>
+            <span class="grid-item-sub">ميكروفون</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="tandem">
+            <span class="grid-item-icon">🤖</span>
+            <span class="grid-item-name">شريك المحادثة</span>
+            <span class="grid-item-sub hot">تانديم ذكي</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="emails">
+            <span class="grid-item-icon">✉️</span>
+            <span class="grid-item-name">مراسلات العمل</span>
+            <span class="grid-item-sub">نماذج رسمية</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="exams">
+            <span class="grid-item-icon">📝</span>
+            <span class="grid-item-name">محاكي الامتحانات</span>
+            <span class="grid-item-sub">Goethe/telc</span>
+          </button>
+        </div>
+
+        <!-- 3. الأدوات والمصادر التفاعلية -->
+        <div class="sheet-group-label">الأدوات والمصادر التفاعلية</div>
+        <div class="sheet-grid">
+          <button class="sheet-grid-item nav-tab-btn" data-view="time">
+            <span class="grid-item-icon">🕒</span>
+            <span class="grid-item-name">الساعة والأرقام</span>
+            <span class="grid-item-sub">تفاعلي</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="radio">
+            <span class="grid-item-icon">📻</span>
+            <span class="grid-item-name">راديو ألمانيا</span>
+            <span class="grid-item-sub live">مباشر 🔴</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="stories">
+            <span class="grid-item-icon">📖</span>
+            <span class="grid-item-name">القصص التفاعلية</span>
+            <span class="grid-item-sub">A1 - B1</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="living">
+            <span class="grid-item-icon">🇩🇪</span>
+            <span class="grid-item-name">الحياة في ألمانيا</span>
+            <span class="grid-item-sub">دليل شامل</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="flashcards">
+            <span class="grid-item-icon">🎴</span>
+            <span class="grid-item-name">البطاقات الذكية</span>
+            <span class="grid-item-sub">مراجعة سريعة</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="builder">
+            <span class="grid-item-icon">🧱</span>
+            <span class="grid-item-name">بناء الجمل</span>
+            <span class="grid-item-sub">قواعد وترتيب</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="quiz">
+            <span class="grid-item-icon">🎯</span>
+            <span class="grid-item-name">بنك الاختبارات</span>
+            <span class="grid-item-sub">تقييم شامل</span>
+          </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="gamification">
+            <span class="grid-item-icon">🏆</span>
+            <span class="grid-item-name">لوحة الشرف والـ XP</span>
+            <span class="grid-item-sub">التقدم</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Profile Management Modal Container -->
   <div id="profile-modal-container"></div>

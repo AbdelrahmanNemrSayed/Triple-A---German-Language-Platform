@@ -23,6 +23,7 @@ import { ArticlesTrainer } from './articles_trainer.js';
 import { TimeNumbersTrainer } from './time_numbers.js';
 import { DailyQuestManager } from './daily_quests.js';
 import { AITandemPartner } from './ai_tandem.js';
+import { PWAInstaller } from './pwa_installer.js';
 
 class GermanApp {
   constructor() {
@@ -57,6 +58,7 @@ class GermanApp {
     this.timeNumbersTrainer = null;
     this.dailyQuestManager = null;
     this.aiTandemPartner = null;
+    this.pwaInstaller = null;
 
     this.init();
   }
@@ -66,6 +68,8 @@ class GermanApp {
     Storage.recordDailyVisit();
     this.initProfileManager();
     this.initDailyQuest();
+    this.initPWA();
+    this.initMobileSheet();
     this.renderGamificationHeader();
     this.renderHeaderStats();
     this.renderWordOfTheDay();
@@ -524,6 +528,7 @@ class GermanApp {
   // --- التبديل بين الشاشات الرئيسية الموسعة ---
   switchView(viewName) {
     this.activeView = viewName;
+    this.closeMobileMoreSheet();
 
     // تحديث أزرار شريط التنقل العلوي
     const navButtons = document.querySelectorAll('.nav-tab-btn');
@@ -835,6 +840,86 @@ class GermanApp {
     }
   }
 
+  initArticlesView() {
+    if (!this.articlesTrainer) {
+      this.articlesTrainer = new ArticlesTrainer('#articles-mount', () => this.renderGamificationHeader());
+      this.articlesTrainer.init();
+    }
+  }
+
+  initTimeView() {
+    if (!this.timeNumbersTrainer) {
+      this.timeNumbersTrainer = new TimeNumbersTrainer('#time-mount', () => this.renderGamificationHeader());
+      this.timeNumbersTrainer.init();
+    }
+  }
+
+  initTandemView() {
+    if (!this.aiTandemPartner) {
+      this.aiTandemPartner = new AITandemPartner('#tandem-mount', () => this.renderGamificationHeader());
+      this.aiTandemPartner.init();
+    }
+  }
+
+  initDailyQuest() {
+    if (!this.dailyQuestManager) {
+      this.dailyQuestManager = new DailyQuestManager({
+        onQuestComplete: () => this.renderGamificationHeader(),
+        onNavigate: (view) => this.switchView(view)
+      });
+      this.dailyQuestManager.init();
+    }
+  }
+
+  initPWA() {
+    if (!this.pwaInstaller) {
+      this.pwaInstaller = new PWAInstaller();
+    }
+  }
+
+  initMobileSheet() {
+    const sheetOverlay = document.getElementById('mobile-more-sheet');
+    const closeBtn = document.getElementById('btn-close-more-sheet');
+    const dragHandle = document.getElementById('sheet-drag-handle');
+
+    if (closeBtn) closeBtn.addEventListener('click', () => this.closeMobileMoreSheet());
+    if (sheetOverlay) {
+      sheetOverlay.addEventListener('click', (e) => {
+        if (e.target === sheetOverlay) this.closeMobileMoreSheet();
+      });
+    }
+
+    // Touch swipe down on handle to close sheet
+    if (dragHandle && sheetOverlay) {
+      let startY = 0;
+      dragHandle.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      dragHandle.addEventListener('touchmove', (e) => {
+        const deltaY = e.touches[0].clientY - startY;
+        if (deltaY > 60) {
+          this.closeMobileMoreSheet();
+        }
+      }, { passive: true });
+    }
+  }
+
+  openMobileMoreSheet() {
+    const sheet = document.getElementById('mobile-more-sheet');
+    if (sheet) {
+      sheet.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  closeMobileMoreSheet() {
+    const sheet = document.getElementById('mobile-more-sheet');
+    if (sheet) {
+      sheet.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
   // --- ربط الأحداث العامة ---
   bindGlobalEvents() {
     // تبديل المظهر (سواء من القائمة الجانبية أو الشريط العلوي)
@@ -865,16 +950,37 @@ class GermanApp {
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
     if (backdrop) backdrop.addEventListener('click', closeSidebar);
 
-    // أزرار التنقل بين الشاشات (الجانبي والسفلي)
+    // زر مهمة اليوم في الشريط السفلي
+    const mobQuestBtn = document.getElementById('mob-nav-quest');
+    if (mobQuestBtn) {
+      mobQuestBtn.addEventListener('click', () => {
+        if (this.dailyQuestManager) {
+          this.dailyQuestManager.openQuestModal();
+        }
+      });
+    }
+
+    // زر فتح قائمة جميع الأقسام السفلية
+    const mobMoreBtn = document.getElementById('mob-nav-more');
+    if (mobMoreBtn) {
+      mobMoreBtn.addEventListener('click', () => {
+        this.openMobileMoreSheet();
+      });
+    }
+
+    // أزرار التنقل بين الشاشات (الجانبي والسفلي وفي القائمة السفلية)
     const allNavButtons = document.querySelectorAll('.nav-tab-btn, .mobile-nav-item');
     allNavButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const view = btn.getAttribute('data-view');
-        this.switchView(view);
-        // إغلاق القائمة الجانبية تلقائياً في شاشات الموبايل
-        closeSidebar();
-        // التمرير لأعلى الصفحة بنعومة عند التبديل
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (view) {
+          this.switchView(view);
+          // إغلاق القائمة الجانبية وشيت الأقسام في شاشات الموبايل
+          closeSidebar();
+          this.closeMobileMoreSheet();
+          // التمرير لأعلى الصفحة بنعومة عند التبديل
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       });
     });
 
