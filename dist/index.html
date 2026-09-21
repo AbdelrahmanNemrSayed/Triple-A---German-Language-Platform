@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="منصة DeutschMeister Pro لتعلم مفردات وقواعد ونطق اللغة الألمانية للمستويات A1 و A2 و B1، ومسارات سوق العمل والوظائف (IT، خدمة العملاء، المجال الطبي، والمقابلات)، والمحادثات الواقعية، وتدريب النطق بالميكروفون، ومختبر بناء الجمل، والإيميلات المهنية.">
+  <meta name="keywords" content="تعلم الألمانية, A1, A2, B1, ألماني للعمل, مصطلحات طبية ألماني, IT بالألماني, خدمة عملاء ألماني, محادثات ألماني, der die das, فلاش كارد ألماني, ميكروفون نطق ألماني">
+  <meta name="author" content="Triple A">
+  <meta name="copyright" content="Triple A - جميع الحقوق محفوظة 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Triple A | DeutschMeister Pro - منصة إتقان الألمانية وسوق العمل">
+  <meta property="og:description" content="منصة تعليمية متطورة لإتقان اللغة الألمانية وسوق العمل الدولي، برعاية وتطوير Triple A.">
+  <meta property="og:type" content="website">
+
+  <title>Triple A | منصة DeutschMeister Pro لتعليم الألمانية وسوق العمل</title>
+  <link rel="icon" type="image/jpeg" href="./assets/images/triple_a_logo.jpg">
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./assets/css/style.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/components.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/quiz.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/career.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/modules_extended.css?v=2.2">
+</head>
+<body>
+
+<!-- ==========================================================================
+     App Shell Layout: Sidebar Navigation + Main Content Area
+     ========================================================================== -->
+<div class="app-layout" id="app-layout">
+
+  <!-- Sidebar Backdrop for Mobile -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       Sidebar Navigation (القائمة الجانبية الفاخرة)
+       ========================================================================== -->
+  <aside class="app-sidebar" id="app-sidebar" aria-label="القائمة الجانبية الرئيسية">
+    <div class="sidebar-header">
+      <a href="#" class="sidebar-brand nav-tab-btn" data-view="vocab" id="brand-logo-link" title="الرئيسية - Triple A DeutschMeister">
+        <div class="brand-emblem" aria-hidden="true">
+          <img src="./assets/images/triple_a_logo.jpg" alt="Triple A Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-text-group">
+          <div class="brand-title" dir="ltr">
+            <span>Triple <span class="highlight">A</span></span>
+            <span class="brand-pro-tag">PRO</span>
+          </div>
+          <div class="brand-subtitle">منصة إتقان الألمانية وسوق العمل</div>
+        </div>
+      </a>
+
+      <!-- زر إغلاق القائمة للموبايل -->
+      <button class="btn-close-sidebar" id="btn-close-sidebar" aria-label="إغلاق القائمة الجانبية">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigation Menu Items (Vertical Sidebar Navigation) -->
+    <div class="sidebar-menu-wrapper">
+      <nav class="sidebar-nav" aria-label="أقسام الموقع">
+        <!-- 1. المفردات والقواعد الأساسية -->
+        <div class="sidebar-section-label">المفردات وتصريف الأفعال</div>
+
+        <button class="sidebar-nav-item nav-tab-btn active" data-view="vocab" id="tab-vocab-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </span>
+          <span class="nav-item-text">مستكشف المفردات</span>
+          <span class="nav-item-badge">A1-B1</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="articles" id="tab-articles-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-bolt" style="font-size: 1.15rem; color: #00f2fe;"></i>
+          </span>
+          <span class="nav-item-text">تحدي der / die / das</span>
+          <span class="nav-item-badge badge-hot">سرعة 🔥</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="verbs" id="tab-verbs-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </span>
+          <span class="nav-item-text">مصرف الأفعال والأزمنة</span>
+          <span class="nav-item-badge">جديد</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="prepositions" id="tab-prep-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </span>
+          <span class="nav-item-text">الأفعال وحروف الجر</span>
+          <span class="nav-item-badge">Kasus</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="grammar" id="tab-grammar-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-scale-balanced" style="font-size: 1.15rem;"></i>
+          </span>
+          <span class="nav-item-text">بنك القواعد الذهبي</span>
+          <span class="nav-item-badge">مصفوفة الإعراب</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="compounds" id="tab-compounds-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-puzzle-piece" style="font-size: 1.15rem;"></i>
+          </span>
+          <span class="nav-item-text">تفكيك الكلمات المركبة</span>
+          <span class="nav-item-badge">Komposita</span>
+        </button>
+
+        <!-- 2. المهارات وسوق العمل -->
+        <div class="sidebar-section-label" style="margin-top: 1rem;">المهارات والتواصل العملي</div>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="career" id="tab-career-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </span>
+          <span class="nav-item-text">مسارات العمل والوظائف</span>
+          <span class="nav-item-badge badge-hot">مطلوب</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="dialogues" id="tab-dialogues-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </span>
+          <span class="nav-item-text">محادثات وسيناريوهات</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="tandem" id="tab-tandem-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-robot" style="font-size: 1.15rem; color: #a855f7;"></i>
+          </span>
+          <span class="nav-item-text">شريك المحادثة الذكي</span>
+          <span class="nav-item-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">AI Chat</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="stories" id="tab-stories-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </span>
+          <span class="nav-item-text">قصص واستماع تفاعلي</span>
+          <span class="nav-item-badge">Hören</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="builder" id="tab-builder-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H7.5"></path>
+              <path d="M4.5 19.5h15"></path>
+              <rect x="3" y="10" width="8" height="8" rx="2"></rect>
+            </svg>
+          </span>
+          <span class="nav-item-text">مختبر بناء الجمل</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="speech" id="tab-speech-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </span>
+          <span class="nav-item-text">مدرب النطق (الميكروفون)</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="emails" id="tab-emails-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </span>
+          <span class="nav-item-text">الإيميلات والمراسلات</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="radio" id="tab-radio-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-tower-broadcast" style="font-size: 1.15rem;"></i>
+          </span>
+          <span class="nav-item-text">راديو الألمانية والأخبار</span>
+          <span class="nav-item-badge badge-hot">مباشر 🔴</span>
+        </button>
+
+        <!-- 3. التحديات والحياة في ألمانيا -->
+        <div class="sidebar-section-label" style="margin-top: 1rem;">التحديات والاندماج بألمانيا</div>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="time" id="tab-time-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-clock" style="font-size: 1.15rem; color: #10b981;"></i>
+          </span>
+          <span class="nav-item-text">الأرقام والساعة الألمانية</span>
+          <span class="nav-item-badge">Uhrzeit</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="flashcards" id="tab-flashcards-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </span>
+          <span class="nav-item-text">بطاقات الاستذكار (3D)</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="quiz" id="tab-quiz-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </span>
+          <span class="nav-item-text">مركز الاختبارات</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="exams" id="tab-exams-btn">
+          <span class="nav-item-icon-box">
+            <i class="fa-solid fa-certificate" style="font-size: 1.15rem; color: #f59e0b;"></i>
+          </span>
+          <span class="nav-item-text">محاكي امتحانات غوته وتيلك</span>
+          <span class="nav-item-badge badge-gold">شهادة PRO</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="gamification" id="tab-game-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </span>
+          <span class="nav-item-text">الألعاب والستريك</span>
+          <span class="nav-item-badge badge-hot">🔥 60s Rush</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="living" id="tab-living-btn">
+          <span class="nav-item-icon-box">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </span>
+          <span class="nav-item-text">دليل الحياة في ألمانيا</span>
+          <span class="nav-item-badge">🇩🇪 هام</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Sidebar Footer Utilities -->
+    <div class="sidebar-footer">
+      <button class="btn-sidebar-util" id="btn-open-rules-modal" title="دليل القواعد الصوتية والأدوات">
+        <span class="sidebar-util-icon">📖</span>
+        <span class="sidebar-util-text">دليل القواعد والأدوات</span>
+      </button>
+
+      <button class="btn-sidebar-util btn-theme-toggle" id="theme-toggle-btn" title="الوضع الحالي: الوضع النهاري (اضغط للتبديل إلى الوضع الليلي)">
+        <div class="theme-btn-content">
+          <span class="theme-btn-icon-wrap" style="color: #f59e0b;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="btn-text">الوضع النهاري</span>
+        </div>
+        <span class="theme-status-badge light-mode-active">مفعّل ☀️</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       Main App Content (المحتوى الرئيسي للمنصة)
+       ========================================================================== -->
+  <div class="app-main-content">
+    <!-- Top Topbar with Hamburger Toggle & Quick Actions -->
+    <header class="app-topbar">
+      <div class="topbar-left">
+        <button class="btn-hamburger" id="btn-hamburger-toggle" aria-label="فتح القائمة الجانبية" title="القائمة">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="topbar-page-info">
+          <span class="topbar-current-view" id="topbar-view-title">مستكشف المفردات</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="topbar-gamification-widget">
+          <button class="topbar-quest-pill" id="topbar-quest-pill" title="المهمة اليومية - اربح +50 XP">
+            <span class="quest-pill-icon">⚡</span>
+            <span class="quest-pill-text">مهمة اليوم</span>
+          </button>
+          <button class="topbar-streak-pill nav-tab-btn" data-view="gamification" id="topbar-streak-widget" title="أيام الستريك المتتالية">
+            🔥 <span id="topbar-streak-num">1</span> أيام
+          </button>
+          <button class="topbar-xp-pill nav-tab-btn" data-view="gamification" id="topbar-xp-widget" title="نقاط الخبرة">
+            ⭐ <span id="topbar-xp-num">0</span> XP
+          </button>
+        </div>
+        <div id="user-profile-badge-mount"></div>
+      </div>
+    </header>
+
+    <main>
+    <!-- ==========================================================================
+         VIEW 1: مستكشف المفردات والصفحة الأساسية (Vocabulary Explorer / Home)
+         ========================================================================== -->
+    <section class="view-panel" id="view-vocabulary">
+      <!-- Hero Section & Word of the Day (يظهر حصرياً في الصفحة الأساسية) -->
+      <section class="hero-section" id="hero-section">
+        <div class="container hero-layout">
+          <div>
+            <div class="hero-brand-pill">
+              <img src="./assets/images/triple_a_logo.jpg" alt="Triple A Logo" class="hero-pill-logo">
+              <span>منصة تعليمية رسمية ومطورة بواسطة <strong>Triple A</strong></span>
+            </div>
+            <h1 class="hero-main-title">منصة التميز في الألمانية وسوق العمل الدولي</h1>
+            <p class="hero-description">
+              مفردات المستويات الأولى (A1, A2, B1) مع أدوات التعريف ملونة، وجمل حية، ونطق ألماني بشري، ومسارات عملية تؤهلك لوظائف البرمجة، وخدمة العملاء، والقطاع الطبي، واجتياز مقابلات التوظيف بثقة.
+            </p>
+
+            <!-- Overall Progress Card -->
+            <div class="progress-card">
+              <div class="progress-header">
+                <span class="progress-title">📊 نسبة إنجازك العام في الحفظ والإتقان:</span>
+                <span class="progress-percent-label" id="overall-progress-text">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="overall-progress-bar" style="width: 0%;"></div>
+              </div>
+              <div class="stats-badges-row">
+                <div class="stat-item">
+                  <span>✨ كلمات أتقنتها:</span>
+                  <strong id="stat-mastered-count">0</strong>
+                </div>
+                <div class="stat-item">
+                  <span>⭐ المفضلة:</span>
+                  <strong id="stat-favs-count">0</strong>
+                </div>
+                <div class="stat-item">
+                  <span>🔄 تحتاج مراجعة:</span>
+                  <strong id="stat-review-count">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Word of the Day Widget -->
+          <div id="word-of-the-day-container">
+            <!-- يُحقن ديناميكياً عبر JS -->
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <!-- Studio Command Bar: شريط أدوات مستكشف المفردات الاحترافي -->
+        <div class="filter-toolbar" id="vocab-filter-toolbar">
+          <!-- Toolbar Header: Title & Counter -->
+          <div class="toolbar-header-deck">
+            <div class="deck-title-group">
+              <span class="deck-badge">STUDIO</span>
+              <h2 class="deck-heading">لوحة التحكم في المفردات الألمانية</h2>
+            </div>
+            <div class="deck-stats">
+              <span class="deck-count-pill" id="vocab-count-indicator">0 كلمة</span>
+            </div>
+          </div>
+
+          <!-- Level Segmented Switcher -->
+          <div class="deck-level-bar">
+            <div class="level-segmented-control" role="tablist">
+              <button class="level-pill active" data-level="A1" id="level-btn-a1">
+                <span class="lvl-tag">A1</span>
+                <span class="lvl-label">المستوى المبتدئ</span>
+              </button>
+              <button class="level-pill" data-level="A2" id="level-btn-a2">
+                <span class="lvl-tag">A2</span>
+                <span class="lvl-label">المستوى الأساسي</span>
+              </button>
+              <button class="level-pill" data-level="B1" id="level-btn-b1">
+                <span class="lvl-tag">B1</span>
+                <span class="lvl-label">المستوى المتوسط</span>
+              </button>
+              <button class="level-pill" data-level="ALL" id="level-btn-all">
+                <span class="lvl-tag">ALL</span>
+                <span class="lvl-label">جميع المستويات</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Search & Category Filter Row -->
+          <div class="deck-search-row">
+            <div class="search-box-wrapper" id="vocab-search-wrapper">
+              <span class="search-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input type="text" class="search-input" id="vocab-search-input" placeholder="ابحث فوري عن كلمة، معنى عربي، أو جملة..." aria-label="بحث في المفردات" autocomplete="off" spellcheck="false">
+              <button type="button" class="search-clear-btn" id="btn-clear-vocab-search" aria-label="مسح البحث" title="مسح البحث">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <span class="search-kbd-hint" aria-hidden="true" title="اضغط Ctrl+K للبحث السريع"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+            </div>
+
+            <div class="category-dropdown-wrap">
+              <span class="dropdown-icon" aria-hidden="true">🏷️</span>
+              <select class="category-select" id="category-filter-select" aria-label="اختر الموضوع">
+                <!-- يُحقن ديناميكياً -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Bottom Control Deck: Interactive Article Filters & Status Chips -->
+          <div class="deck-controls-bottom">
+            <!-- أدوات التعريف كفلاتر تفاعلية فورية -->
+            <div class="article-interactive-filters" aria-label="تصفية حسب أداة التعريف">
+              <span class="deck-sublabel">الأداة:</span>
+              <button class="article-filter-btn active" data-article="ALL" id="art-btn-all">الكل</button>
+              <button class="article-filter-btn filter-der" data-article="der" id="art-btn-der">
+                <span class="legend-dot der"></span> der
+              </button>
+              <button class="article-filter-btn filter-die" data-article="die" id="art-btn-die">
+                <span class="legend-dot die"></span> die
+              </button>
+              <button class="article-filter-btn filter-das" data-article="das" id="art-btn-das">
+                <span class="legend-dot das"></span> das
+              </button>
+            </div>
+
+            <!-- تصنيف حالة الحفظ والمفضلة مع عدادات حية -->
+            <div class="status-pills-group" aria-label="تصفية حسب حالة الحفظ">
+              <button class="status-pill active" data-status="ALL" id="status-btn-all">الكل</button>
+              <button class="status-pill" data-status="FAVORITES" id="status-btn-fav">⭐ المفضلة</button>
+              <button class="status-pill" data-status="REVIEW" id="status-btn-rev">🔄 مراجعة</button>
+              <button class="status-pill" data-status="MASTERED" id="status-btn-mst">✨ متقنة</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-meta-bar">
+          <div>الكلمات المعروضة: <span class="vocab-counter-tag" id="vocab-count-indicator">0 كلمة</span></div>
+          <small>💡 انقر على زر الصوت للاستماع للكلمة أو الجملة بسرعة طبيعية أو بطيئة.</small>
+        </div>
+
+        <div class="vocab-grid" id="vocab-cards-grid">
+          <!-- بطاقات الكلمات -->
+        </div>
+
+        <div class="load-more-wrap" id="load-more-container" style="display: none;">
+          <button class="btn-load-more" id="btn-load-more-vocab" type="button">
+            <span class="load-more-icon">✨</span>
+            <span class="load-more-text">عرض المزيد من الكلمات</span>
+            <span class="load-more-badge" id="load-more-remaining-badge">+18</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 2: مسارات العمل والوظائف (Deutsch im Beruf)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-career">
+      <div class="container" id="career-mount">
+        <!-- يُحقن ديناميكياً عبر career.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 3: سيناريوهات المحادثات الواقعية (Interaktive Dialoge)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-dialogues">
+      <div class="container" id="dialogues-mount">
+        <!-- يُحقن ديناميكياً عبر dialogues.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 4: مختبر بناء وتراكيب الجمل (Satzbau Trainer)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-builder">
+      <div class="container" id="builder-mount">
+        <!-- يُحقن ديناميكياً عبر sentence_builder.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 5: تدريب النطق الصوتي بالميكروفون (Speech Trainer)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-speech">
+      <div class="container" id="speech-mount">
+        <!-- يُحقن ديناميكياً عبر speech_trainer.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 6: مدرب الإيميلات المهنية الرسمية (E-Mail Trainer)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-emails">
+      <div class="container" id="emails-mount">
+        <!-- يُحقن ديناميكياً عبر emails.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 7: البطاقات التفاعلية (Flashcards 3D)
+         ========================================================================== -->
+    <section class="view-panel hidden flashcards-section" id="view-flashcards">
+      <div class="container">
+        <div id="flashcards-mount">
+          <!-- يُحقن نظام الفلاش كارد هنا عبر flashcards.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VIEW 8: مركز الاختبارات والتحديات (Quiz Center)
+         ========================================================================== -->
+    <section class="view-panel hidden quiz-section" id="view-quiz">
+      <div class="container quiz-wrapper">
+        <div class="quiz-setup-card">
+          <h2 class="quiz-setup-title">🎯 مركز التحديات والاختبارات التفاعلية</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+            اختر نوع التحدي الذي ترغب في ممارسته الآن لتقييم مستواك وتثبيت الكلمات في ذاكرتك:
+          </p>
+
+          <div class="setup-form-grid">
+            <div class="form-group">
+              <label for="quiz-mode-select">نوع الاختبار:</label>
+              <select class="form-select" id="quiz-mode-select">
+                <option value="article">تحدي أدوات التعريف (der / die / das)</option>
+                <option value="meaning">اختبار معاني وترجمة المفردات</option>
+                <option value="listening">اختبار الاستماع والنطق الصوتي</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quiz-count-select">عدد الأسئلة:</label>
+              <select class="form-select" id="quiz-count-select">
+                <option value="5">5 أسئلة سريعة</option>
+                <option value="10" selected>10 أسئلة (موصى به)</option>
+                <option value="15">15 سؤالاً شاملاً</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="btn-start-quiz-trigger" style="width: 100%;">
+            <span>ابدأ التحدي الآن 🚀</span>
+          </button>
+        </div>
+
+        <div id="quiz-mount"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         View 9: مختبر القصص والاستماع التفاعلي (Stories & Hörverstehen Lab)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-stories">
+      <div class="container" id="stories-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 10: مصرف تصريف الأفعال والأزمنة (Verb Conjugator & Tenses)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-verbs">
+      <div class="container" id="verbs-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 11: الأفعال وحروف الجر والحالات (Verben mit Präpositionen)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-prepositions">
+      <div class="container" id="prepositions-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 12: نظام التلعيب والستريك وتحدي السرعة (Gamification & 60-Sec Rush)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-gamification">
+      <div class="container" id="gamification-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 13: دليل الحياة والمعيشة في ألمانيا (Leben & Alltag in Deutschland)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-living">
+      <div class="container" id="living-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 14: محاكي امتحانات غوته وتيلك والشهادات الرسمية (Goethe & Telc Simulator)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-exams">
+      <div class="container" id="exams-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 15: بنك القواعد الذهبي ومصفوفة الحالات وحاسبة الصفات (Grammar Vault)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-grammar">
+      <div class="container" id="grammar-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 16: مختبر تفكيك الكلمات المركبة (Compound Words Deconstructor)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-compounds">
+      <div class="container" id="compounds-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 17: راديو الألمانية الحية والأخبار البطيئة (Live German Radio & Slow Audio)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-radio">
+      <div class="container" id="radio-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 18: تحدي أدوات التعريف السريع (Der, Die, Das Blitz-Trainer)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-articles">
+      <div class="container" id="articles-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 19: مدرب الأرقام والساعة الألمانية (Uhrzeit & Zahlen)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-time">
+      <div class="container" id="time-mount"></div>
+    </section>
+
+    <!-- ==========================================================================
+         View 20: شريك المحادثة الألماني الذكي (German AI Tandem Partner)
+         ========================================================================== -->
+    <section class="view-panel hidden" id="view-tandem">
+      <div class="container" id="tandem-mount"></div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Modal: دليل القواعد الصوتية والأدوات (Grammar & Pronunciation Modal)
+       ========================================================================== -->
+  <div class="modal-overlay hidden" id="rules-modal" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-title" id="rules-modal-title">📖 دليل النطق وقواعد اللغة الألمانية</h2>
+        <button class="btn-close-modal" id="btn-close-rules-modal" aria-label="إغلاق النافذة">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <section class="rules-section">
+          <h3 class="rules-section-title">🔵 أسرار حفظ أدوات التعريف (der, die, das)</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+            في الألمانية، احفظ دائماً الكلمة مع أداتها. إليك نهايات شهيرة تساعدك فوراً:
+          </p>
+          <table class="rules-table">
+            <thead>
+              <tr>
+                <th>الأداة</th>
+                <th>النهايات الدالة عليها</th>
+                <th>أمثلة شائعة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: var(--color-der);">der (مذكر)</strong></td>
+                <td><code>-er, -ling, -or, -ist, -ismus</code></td>
+                <td>der Lehrer, der Motor, der Optimismus</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--color-die);">die (مؤنث)</strong></td>
+                <td><code>-ung, -heit, -keit, -schaft, -tät, -in</code></td>
+                <td>die Wohnung, die Freiheit, die Freundin</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--color-das);">das (محايد)</strong></td>
+                <td><code>-chen, -lein, -ment, -um, -tum</code></td>
+                <td>das Mädchen, das Dokument, das Museum</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="rules-section">
+          <h3 class="rules-section-title">🗣️ دليل نطق الحروف الألمانية الخاصة</h3>
+          <table class="rules-table">
+            <thead>
+              <tr>
+                <th>الحرف / التركيب</th>
+                <th>طريقة النطق بالعربية</th>
+                <th>مثال من الموقع</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ch</code> بعد (a, o, u)</td>
+                <td>تُنطق <strong>خاء</strong> عربية صريحة</td>
+                <td>das Buch (بوخ), machen</td>
+              </tr>
+              <tr>
+                <td><code>ch</code> بعد (e, i, ä, ö, ü)</td>
+                <td>تُنطق <strong>شين رقيقة ناعمة</strong> جداً</td>
+                <td>ich (إيش), die Milch (ميلش)</td>
+              </tr>
+              <tr>
+                <td><code>sch</code></td>
+                <td>تُنطق <strong>شين</strong> عادية مثل العربية</td>
+                <td>die Schule, der Tisch</td>
+              </tr>
+              <tr>
+                <td><code>sp / st</code> في أول الكلمة</td>
+                <td>تُنطق <strong>شب / شت</strong></td>
+                <td>sprechen (شبريشن), die Stadt (شتات)</td>
+              </tr>
+              <tr>
+                <td><code>ei</code></td>
+                <td>تُنطق ككلمة <strong>آي</strong> (Eye بالإنجليزية)</td>
+                <td>mein, die Zeit (تسايت)</td>
+              </tr>
+              <tr>
+                <td><code>ie</code></td>
+                <td>تُنطق <strong>ياء ممدودة طويلة</strong></td>
+                <td>das Lied, wiedersehen</td>
+              </tr>
+              <tr>
+                <td><code>eu / äu</code></td>
+                <td>تُنطق <strong>أوي</strong> (Oy)</td>
+                <td>der Freund (فرويند), die Häuser</td>
+              </tr>
+              <tr>
+                <td><code>w</code></td>
+                <td>تُنطق كحرف <strong>الفاء الإنجليزية (V)</strong> دائماً</td>
+                <td>das Wasser (فاسَر), wo (فو)</td>
+              </tr>
+              <tr>
+                <td><code>v</code></td>
+                <td>تُنطق كحرف <strong>الفاء العربية (F)</strong> غالباً</td>
+                <td>der Vater (فاتَر), vier (فير)</td>
+              </tr>
+              <tr>
+                <td><code>z</code></td>
+                <td>تُنطق كصوت <strong>تس</strong> (ts)</td>
+                <td>das Zimmer (تسيمَر), die Zeit</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer with Triple A Copyright -->
+  <footer class="app-main-footer">
+    <div class="container footer-content-wrap">
+      <div class="footer-brand-deck">
+        <img src="./assets/images/triple_a_logo.jpg" alt="Triple A Logo" class="footer-logo-img">
+        <div class="footer-brand-info">
+          <h4 class="footer-brand-name">Triple A — German Language Platform</h4>
+          <p class="footer-brand-slogan">المنصة الذكية المتكاملة لإتقان اللغة الألمانية وسوق العمل والاندماج 🇩🇪</p>
+        </div>
+      </div>
+      <div class="footer-bottom-row">
+        <p class="footer-copyright">
+          جميع الحقوق محفوظة © 2026 حصرياً لـ <strong>Triple A</strong>. يُحظر النسخ أو النقل دون إذن كتابي مسبق.
+        </p>
+        <span class="footer-badge">Triple A Educational Technologies</span>
+      </div>
+    </div>
+  </footer>
+
+  </div> <!-- /.app-main-content -->
+</div> <!-- /.app-layout -->
+
+  <!-- Mobile Bottom Floating Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="شريط التنقل السريع للهواتف">
+    <button class="mobile-nav-item active" data-view="vocab" id="mob-nav-vocab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      </svg>
+      <span>المفردات</span>
+    </button>
+    <button class="mobile-nav-item" data-view="career" id="mob-nav-career">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </svg>
+      <span>العمل</span>
+    </button>
+    <button class="mobile-nav-item" data-view="dialogues" id="mob-nav-dialogues">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span>المحادثات</span>
+    </button>
+    <button class="mobile-nav-item" data-view="speech" id="mob-nav-speech">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+      </svg>
+      <span>النطق 🎙️</span>
+    </button>
+    <button class="mobile-nav-item" data-view="quiz" id="mob-nav-quiz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+      </svg>
+      <span>الاختبارات</span>
+    </button>
+  </nav>
+
+  <!-- Profile Management Modal Container -->
+  <div id="profile-modal-container"></div>
+  <!-- Daily Quest Modal Container -->
+  <div id="daily-quest-modal" class="daily-quest-modal-overlay"></div>
+
+  <!-- Script Modules -->
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>
