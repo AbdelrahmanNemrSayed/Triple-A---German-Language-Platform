@@ -2390,6 +2390,10 @@
 /* ==========================================================================
    6. Topbar User Profile Widget & Multi-User Profile Modal
    ========================================================================== */
+.topbar-brand-mini {
+  display: none;
+}
+
 #user-profile-badge-mount {
   display: flex;
   align-items: center;
@@ -7449,11 +7453,30 @@
     min-width: 0 !important; /* Critical: allows ellipsis to truncate without collision */
   }
 
-  .btn-hamburger {
-    width: 36px !important;
-    height: 36px !important;
-    flex-shrink: 0 !important;
-    border-radius: 10px !important;
+  /* Hide redundant topbar hamburger button on mobile (bottom nav has dedicated sections button) */
+  .btn-hamburger,
+  #btn-hamburger-toggle {
+    display: none !important;
+  }
+
+  .topbar-brand-mini {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(2, 132, 199, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .topbar-logo-mini {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .topbar-page-info {
