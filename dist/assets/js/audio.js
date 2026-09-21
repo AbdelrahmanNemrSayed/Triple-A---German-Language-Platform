@@ -47,6 +47,14 @@ class AudioEngine {
       return;
     }
 
+    if (!this.germanVoice) {
+      this.initVoices();
+    }
+
+    if (this.synth.paused) {
+      this.synth.resume();
+    }
+
     // إيقاف أي صوت قيد التشغيل حالياً
     this.synth.cancel();
 

@@ -7428,18 +7428,155 @@
     font-size: 1.35rem;
   }
 
-  /* Topbar compact adjustments on narrow screens */
-  .topbar-pwa-install-btn {
-    padding: 0.35rem 0.65rem;
-    font-size: 0.75rem;
+  /* ==========================================================================
+     Mobile Topbar & Profile Widget Ergonomics (< 640px & < 480px)
+     ========================================================================== */
+  .app-topbar {
+    padding: 0.45rem 0.65rem !important;
+    height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.45rem !important;
+    overflow: hidden !important;
+  }
+
+  .topbar-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    flex: 1 !important;
+    min-width: 0 !important; /* Critical: allows ellipsis to truncate without collision */
+  }
+
+  .btn-hamburger {
+    width: 36px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  .topbar-page-info {
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .topbar-current-view {
-    font-size: 0.95rem;
-    max-width: 110px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block !important;
+    font-size: 0.9rem !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+
+  .topbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide daily quest pill in topbar on phone (already permanently in mobile bottom bar) */
+  #topbar-quest-pill {
+    display: none !important;
+  }
+
+  /* PWA Install Button as sleek compact circular button on phone */
+  .topbar-pwa-install-btn {
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-pwa-install-btn .pwa-btn-text {
+    display: none !important;
+  }
+  .topbar-pwa-install-btn .pwa-btn-icon {
+    font-size: 1.15rem !important;
+    margin: 0 !important;
+  }
+
+  /* Gamification Streak & XP Pills - ultra compact on mobile */
+  .topbar-streak-pill, .topbar-xp-pill {
+    padding: 0.25rem 0.45rem !important;
+    font-size: 0.74rem !important;
+    gap: 0.2rem !important;
+  }
+
+  /* Sleek, dedicated circular avatar badge on mobile */
+  .user-profile-btn {
+    padding: 0 !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    border: 1.5px solid rgba(16, 185, 129, 0.6) !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2) !important;
+  }
+
+  .user-profile-btn .user-avatar {
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .user-profile-btn .user-info-mini,
+  .user-profile-btn .profile-switch-chevron {
+    display: none !important;
+  }
+
+  /* Profile Management Modal on Mobile */
+  .profile-modal-card {
+    padding: 1.25rem 1rem !important;
+    width: 95% !important;
+    max-height: 86vh !important;
+    border-radius: 20px !important;
+  }
+
+  .profiles-list-grid {
+    max-height: 210px !important;
+  }
+
+  .profile-card-item {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .profile-avatar-display {
+    font-size: 1.65rem !important;
+  }
+
+  .profile-item-name {
+    font-size: 0.95rem !important;
+  }
+
+  .avatar-grid-select {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 0.35rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  /* On very narrow phones (< 420px), hide XP in topbar to allow title and streak to breathe */
+  .topbar-xp-pill {
+    display: none !important;
+  }
+  .topbar-current-view {
+    font-size: 0.84rem !important;
   }
 }
 

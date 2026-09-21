@@ -73,41 +73,66 @@ export class AITandemPartner {
   }
 
   setupSpeechRecognition() {
-    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRec = typeof window !== 'undefined' ? (window.SpeechRecognition || window.webkitSpeechRecognition) : null;
     if (SpeechRec) {
-      this.recognition = new SpeechRec();
-      this.recognition.lang = 'de-DE';
-      this.recognition.continuous = false;
-      this.recognition.interimResults = false;
+      try {
+        this.recognition = new SpeechRec();
+        this.recognition.lang = 'de-DE';
+        this.recognition.continuous = false;
+        this.recognition.interimResults = false;
 
-      this.recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        const input = this.container.querySelector('#tandem-user-input');
-        if (input) {
-          input.value = transcript;
-          this.sendMessage(transcript);
-        }
-        this.stopVoice();
-      };
+        this.recognition.onresult = (event) => {
+          if (event.results && event.results[0] && event.results[0][0]) {
+            const transcript = event.results[0][0].transcript;
+            const input = this.container.querySelector('#tandem-user-input');
+            if (input) {
+              input.value = transcript;
+              this.sendMessage(transcript);
+            }
+          }
+          this.stopVoice();
+        };
 
-      this.recognition.onerror = () => this.stopVoice();
-      this.recognition.onend = () => this.stopVoice();
+        this.recognition.onerror = (err) => {
+          console.warn('AI Tandem speech error:', err);
+          this.stopVoice();
+          const input = this.container.querySelector('#tandem-user-input');
+          if (input && err.error === 'not-allowed') {
+            input.placeholder = '⚠️ يرجى تفعيل إذن الميكروفون من إعدادات المتصفح...';
+          }
+        };
+
+        this.recognition.onend = () => this.stopVoice();
+      } catch (e) {
+        this.recognition = null;
+      }
     }
   }
 
   toggleVoice() {
     if (!this.recognition) {
-      alert('المتصفح لا يدعم الإدخال الصوتي المباشر. يرجى استخدام متصفح Chrome أو الكتابة اليدوية.');
+      const input = this.container.querySelector('#tandem-user-input');
+      if (input) {
+        input.placeholder = '💡 الميكروفون المباشر يتطلب متصفح Chrome/Edge. اكتب رسالتك هنا...';
+        input.focus();
+      }
       return;
     }
 
     if (this.isRecording) {
       this.stopVoice();
     } else {
-      this.isRecording = true;
-      this.recognition.start();
-      const micBtn = this.container.querySelector('#btn-tandem-mic');
-      if (micBtn) micBtn.classList.add('recording');
+      try {
+        this.isRecording = true;
+        this.recognition.start();
+        const micBtn = this.container.querySelector('#btn-tandem-mic');
+        if (micBtn) micBtn.classList.add('recording');
+        const input = this.container.querySelector('#tandem-user-input');
+        if (input) input.placeholder = 'جاري الاستماع إليك بالألمانية... تحدث الآن 🎙️';
+      } catch (e) {
+        console.warn('Error starting voice:', e);
+        this.stopVoice();
+      }
     }
   }
 
@@ -118,6 +143,10 @@ export class AITandemPartner {
     }
     const micBtn = this.container?.querySelector('#btn-tandem-mic');
     if (micBtn) micBtn.classList.remove('recording');
+    const input = this.container?.querySelector('#tandem-user-input');
+    if (input && input.placeholder.includes('جاري الاستماع')) {
+      input.placeholder = 'اكتب ردك بالألمانية أو اضغط على الميكروفون...';
+    }
   }
 
   selectPersona(personaId) {
