@@ -1,0 +1,297 @@
+// data/preposition_verbs.js - قاموس الأفعال مع حروف الجر والحالات الإعرابية (Verben mit Präpositionen)
+
+export const prepositionVerbsData = [
+  // Akkusativ Verbs
+  {
+    id: 'pv_warten',
+    verb: 'warten',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'ينتظر شخصاً أو شيئاً',
+    exampleDe: 'Ich warte seit zwanzig Minuten auf den Bus.',
+    exampleAr: 'أنا أنتظر الحافلة منذ عشرين دقيقة.'
+  },
+  {
+    id: 'pv_freuen_auf',
+    verb: 'sich freuen',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'يتطلع بشوق إلى (أمر قادم في المستقبل)',
+    exampleDe: 'Wir freuen uns sehr auf den Urlaub in den Alpen.',
+    exampleAr: 'نتطلع بشوق كبير إلى العطلة في جبال الألب.'
+  },
+  {
+    id: 'pv_freuen_ueber',
+    verb: 'sich freuen',
+    prep: 'über',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worüber?',
+    questionPerson: 'Über wen?',
+    arabic: 'يفرح بـ (أمر حدث بالفعل أو هدية)',
+    exampleDe: 'Sie hat sich sehr über das Geschenk gefreut.',
+    exampleAr: 'فرحت كثيراً بالهدية التي استلمتها.'
+  },
+  {
+    id: 'pv_interessieren',
+    verb: 'sich interessieren',
+    prep: 'für',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Wofür?',
+    questionPerson: 'Für wen?',
+    arabic: 'يهتم بـ',
+    exampleDe: 'Ich interessiere mich sehr für moderne Softwareentwicklung.',
+    exampleAr: 'أنا مهتم جداً بتطوير البرمجيات الحديثة.'
+  },
+  {
+    id: 'pv_denken',
+    verb: 'denken',
+    prep: 'an',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Woran?',
+    questionPerson: 'An wen?',
+    arabic: 'يفكر في شخص أو أمر',
+    exampleDe: 'Denkst du oft an deine Familie in der Heimat?',
+    exampleAr: 'هل تفكر كثيراً في عائلتك في الوطن؟'
+  },
+  {
+    id: 'pv_bitten',
+    verb: 'bitten',
+    prep: 'um',
+    kasus: 'akkusativ',
+    level: 'B1',
+    questionThing: 'Worum?',
+    questionPerson: 'Um wen?',
+    arabic: 'يطلب مساعدة أو إذناً أو معلومة',
+    exampleDe: 'Ich bitte Sie um einen schnellen Rückruf.',
+    exampleAr: 'أطلب من حضراتكم معاودة الاتصال بي سريعاً.'
+  },
+  {
+    id: 'pv_achten',
+    verb: 'achten',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'ينتبه إلى / يحرص على',
+    exampleDe: 'Achten Sie bitte auf die richtige Aussprache.',
+    exampleAr: 'انتبه من فضلك إلى النطق الصحيح.'
+  },
+  {
+    id: 'pv_aergern',
+    verb: 'sich ärgern',
+    prep: 'über',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worüber?',
+    questionPerson: 'Über wen?',
+    arabic: 'يغضب من / ينزعج من',
+    exampleDe: 'Er ärgert sich über die ständige Zugverspätung.',
+    exampleAr: 'هو ينزعج من تأخر القطارات المستمر.'
+  },
+  {
+    id: 'pv_kuemmern',
+    verb: 'sich kümmern',
+    prep: 'um',
+    kasus: 'akkusativ',
+    level: 'B1',
+    questionThing: 'Worum?',
+    questionPerson: 'Um wen?',
+    arabic: 'يعتني بـ / يتولى أمر كذا',
+    exampleDe: 'Der Support kümmert sich sofort um Ihr Anliegen.',
+    exampleAr: 'فريق الدعم الفني سيعتني بطلبك فوراً.'
+  },
+  {
+    id: 'pv_konzentrieren',
+    verb: 'sich konzentrieren',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'B1',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'يركز على',
+    exampleDe: 'Ich muss mich ganz auf die B1-Prüfung konzentrieren.',
+    exampleAr: 'يجب أن أركز بالكامل على اختبار مستوى B1.'
+  },
+  {
+    id: 'pv_hoffen',
+    verb: 'hoffen',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'A2',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'يأمل في / يرجو',
+    exampleDe: 'Wir hoffen auf eine schnelle Zusage der Firma.',
+    exampleAr: 'نأمل في الحصول على قبول سريع من الشركة.'
+  },
+  {
+    id: 'pv_verzichten',
+    verb: 'verzichten',
+    prep: 'auf',
+    kasus: 'akkusativ',
+    level: 'B1',
+    questionThing: 'Worauf?',
+    questionPerson: 'Auf wen?',
+    arabic: 'يتخلى عن / يستغني عن',
+    exampleDe: 'Auf mein morgendliches Deutschlernen kann ich nicht verzichten.',
+    exampleAr: 'لا يمكنني الاستغناء عن دراستي الصباحية للألمانية.'
+  },
+
+  // Dativ Verbs
+  {
+    id: 'pv_gehoeren',
+    verb: 'gehören',
+    prep: 'zu',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wozu?',
+    questionPerson: 'Zu wem?',
+    arabic: 'ينتمي إلى / يكون جزءاً من',
+    exampleDe: 'Pünktlichkeit gehört zur deutschen Arbeitskultur.',
+    exampleAr: 'الالتزام بالمواعيد ينتمي لثقافة العمل الألمانية الأساسية.'
+  },
+  {
+    id: 'pv_traeumen',
+    verb: 'träumen',
+    prep: 'von',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wovon?',
+    questionPerson: 'Von wem?',
+    arabic: 'يحلم بـ',
+    exampleDe: 'Viele Fachkräfte träumen von einer Karriere in Deutschland.',
+    exampleAr: 'يحلم الكثير من المتخصصين بمسيرة مهنية في ألمانيا.'
+  },
+  {
+    id: 'pv_teilnehmen',
+    verb: 'teilnehmen',
+    prep: 'an',
+    kasus: 'dativ',
+    level: 'B1',
+    questionThing: 'Woran?',
+    questionPerson: 'An wem?',
+    arabic: 'يشارك في (دورة، مؤتمر، اجتماع)',
+    exampleDe: 'Morgen nehme ich an einem wichtigen Meeting teil.',
+    exampleAr: 'غداً سأشارك في اجتماع عمل هام.'
+  },
+  {
+    id: 'pv_helfen',
+    verb: 'helfen',
+    prep: 'bei',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wobei?',
+    questionPerson: 'Bei wem?',
+    arabic: 'يساعد في إنجاز أمر ما',
+    exampleDe: 'Kannst du mir beim Ausfüllen des Formulars helfen?',
+    exampleAr: 'هل يمكنك مساعدتي في ملء الاستمارة؟'
+  },
+  {
+    id: 'pv_abhaengen',
+    verb: 'abhängen',
+    prep: 'von',
+    kasus: 'dativ',
+    level: 'B1',
+    questionThing: 'Wovon?',
+    questionPerson: 'Von wem?',
+    arabic: 'يعتمد على / يتوقف على',
+    exampleDe: 'Der Erfolg hängt von deiner täglichen Übung ab.',
+    exampleAr: 'النجاح يعتمد على تدريبك اليومي المستمر.'
+  },
+  {
+    id: 'pv_gratulieren',
+    verb: 'gratulieren',
+    prep: 'zu',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wozu?',
+    questionPerson: 'Zu wem?',
+    arabic: 'يهنئ بـ (مناسبة / نجاح)',
+    exampleDe: 'Ich gratuliere dir herzlich zum bestandenen B1-Zertifikat!',
+    exampleAr: 'أهنئك من كل قلبي باجتياز شهادة B1 بنجاح!'
+  },
+  {
+    id: 'pv_passen',
+    verb: 'passen',
+    prep: 'zu',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wozu?',
+    questionPerson: 'Zu wem?',
+    arabic: 'يناسب / يلائم شخصاً أو شيئاً',
+    exampleDe: 'Diese Stelle passt perfekt zu Ihren Qualifikationen.',
+    exampleAr: 'هذه الوظيفة تناسب مؤهلاتك تماماً.'
+  },
+  {
+    id: 'pv_fragen',
+    verb: 'fragen',
+    prep: 'nach',
+    kasus: 'dativ',
+    level: 'A2',
+    questionThing: 'Wonach?',
+    questionPerson: 'Nach wem?',
+    arabic: 'يسأل عن طريق أو معلومة أو شخص',
+    exampleDe: 'Der Tourist fragt nach dem Weg zum Hauptbahnhof.',
+    exampleAr: 'يسأل السائح عن الطريق إلى محطة القطارات الرئيسية.'
+  },
+  {
+    id: 'pv_beschaeftigen',
+    verb: 'sich beschäftigen',
+    prep: 'mit',
+    kasus: 'dativ',
+    level: 'B1',
+    questionThing: 'Womit?',
+    questionPerson: 'Mit wem?',
+    arabic: 'ينشغل بـ / يدرس ويتعامل مع',
+    exampleDe: 'In meinem Studium beschäftige ich mich mit Künstlicher Intelligenz.',
+    exampleAr: 'في دراستي الجامعية أتعامل مع الذكاء الاصطناعي.'
+  },
+
+  // Both Cases or Flexible (mit + Dat / über + Akk)
+  {
+    id: 'pv_sprechen',
+    verb: 'sprechen',
+    prep: 'über / mit',
+    kasus: 'both',
+    level: 'A2',
+    questionThing: 'Worüber? (Akk)',
+    questionPerson: 'Mit wem? (Dat)',
+    arabic: 'يتحدث عن أمر (Akk) مع شخص (Dat)',
+    exampleDe: 'Ich habe mit meinem Chef über die Gehaltserhöhung gesprochen.',
+    exampleAr: 'تحدثت مع مديري عن زيادة الراتب.'
+  },
+  {
+    id: 'pv_diskutieren',
+    verb: 'diskutieren',
+    prep: 'über / mit',
+    kasus: 'both',
+    level: 'B1',
+    questionThing: 'Worüber? (Akk)',
+    questionPerson: 'Mit wem? (Dat)',
+    arabic: 'يناقش أمراً مع شخص',
+    exampleDe: 'Das Team diskutiert über das neue Projekt.',
+    exampleAr: 'الفريق يناقش المشروع الجديد.'
+  },
+  {
+    id: 'pv_bedanken',
+    verb: 'sich bedanken',
+    prep: 'für / bei',
+    kasus: 'both',
+    level: 'A2',
+    questionThing: 'Wofür? (Akk)',
+    questionPerson: 'Bei wem? (Dat)',
+    arabic: 'يشكر على شيء (Akk) لدى شخص (Dat)',
+    exampleDe: 'Ich bedanke mich bei Ihnen für das angenehme Gespräch.',
+    exampleAr: 'أشكر حضرتكم على هذه المحادثة الطيبة.'
+  }
+];

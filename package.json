@@ -1,0 +1,14 @@
+{
+  "name": "deutsch-meister",
+  "version": "1.0.0",
+  "description": "منصة تعلم مفردات وقواعد ونطق اللغة الألمانية A1, A2, B1",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test_verifier.js"
+  },
+  "keywords": ["german", "language-learning", "a1", "a2", "b1", "arabic"],
+  "author": "DeutschMeister",
+  "license": "MIT"
+}
