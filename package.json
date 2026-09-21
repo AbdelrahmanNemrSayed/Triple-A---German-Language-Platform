@@ -4,7 +4,6 @@
   "description": "منصة تعليم اللغة الألمانية وسوق العمل الألماني - Triple A",
   "type": "module",
   "scripts": {
-    "build": "echo 'Static site ready'",
     "start": "node server.js",
     "test": "node test_verifier.js"
   },

@@ -1,7 +1,4 @@
 {
-  "version": 2,
-  "outputDirectory": ".",
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/(.*)",
