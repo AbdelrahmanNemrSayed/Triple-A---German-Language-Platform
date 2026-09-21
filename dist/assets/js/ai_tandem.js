@@ -51,6 +51,11 @@ export class AITandemPartner {
     this.setupSpeechRecognition();
   }
 
+  init() {
+    if (!this.container) return;
+    this.render();
+  }
+
   initPersonaChat() {
     this.messages = [
       {

@@ -7,9 +7,24 @@ import { audioPlayer } from './audio.js';
 
 export class DailyQuestManager {
   constructor(onXPUpdate) {
-    this.onXPUpdate = onXPUpdate || (() => {});
+    if (typeof onXPUpdate === 'function') {
+      this.onXPUpdate = onXPUpdate;
+    } else if (onXPUpdate && typeof onXPUpdate.onQuestComplete === 'function') {
+      this.onXPUpdate = onXPUpdate.onQuestComplete;
+      this.onNavigate = onXPUpdate.onNavigate;
+    } else {
+      this.onXPUpdate = () => {};
+    }
     this.modalEl = null;
     this.todayKey = this.getTodayDateString();
+  }
+
+  init() {
+    this.updateTopbarBadge();
+  }
+
+  openQuestModal() {
+    this.openModal();
   }
 
   getTodayDateString() {

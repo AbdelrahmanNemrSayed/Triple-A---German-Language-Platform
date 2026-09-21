@@ -7,8 +7,8 @@ export class PWAInstaller {
   constructor() {
     this.deferredPrompt = null;
     this.isInstalled = false;
-    this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    this.isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    this.isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    this.isStandalone = (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || (typeof navigator !== 'undefined' && navigator.standalone === true);
 
     this.init();
   }
@@ -20,18 +20,17 @@ export class PWAInstaller {
   }
 
   registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
+    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+      const register = () => {
         navigator.serviceWorker.register('/sw.js', { scope: '/' })
           .then((registration) => {
             console.log('✅ [PWA] Service Worker registered with scope:', registration.scope);
-            // Check for updates
             registration.onupdatefound = () => {
               const installingWorker = registration.installing;
               if (installingWorker) {
                 installingWorker.onstatechange = () => {
                   if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    console.log('🔄 [PWA] New version available, ready for reload.');
+                    console.log('🔄 [PWA] New version available.');
                   }
                 };
               }
@@ -40,7 +39,13 @@ export class PWAInstaller {
           .catch((err) => {
             console.warn('⚠️ [PWA] Service Worker registration failed:', err);
           });
-      });
+      };
+
+      if (document.readyState === 'complete') {
+        register();
+      } else {
+        window.addEventListener('load', register);
+      }
     }
   }
 

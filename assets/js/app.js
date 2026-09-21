@@ -64,18 +64,18 @@ class GermanApp {
   }
 
   init() {
-    this.initTheme();
-    Storage.recordDailyVisit();
-    this.initProfileManager();
-    this.initDailyQuest();
-    this.initPWA();
-    this.initMobileSheet();
-    this.renderGamificationHeader();
-    this.renderHeaderStats();
-    this.renderWordOfTheDay();
-    this.populateCategoryFilter();
-    this.renderVocabGrid();
-    this.bindGlobalEvents();
+    try { this.initTheme(); } catch (e) { console.error('Error in initTheme:', e); }
+    try { Storage.recordDailyVisit(); } catch (e) { console.error('Error in recordDailyVisit:', e); }
+    try { this.initProfileManager(); } catch (e) { console.error('Error in initProfileManager:', e); }
+    try { this.initDailyQuest(); } catch (e) { console.error('Error in initDailyQuest:', e); }
+    try { this.initPWA(); } catch (e) { console.error('Error in initPWA:', e); }
+    try { this.initMobileSheet(); } catch (e) { console.error('Error in initMobileSheet:', e); }
+    try { this.renderGamificationHeader(); } catch (e) { console.error('Error in renderGamificationHeader:', e); }
+    try { this.renderHeaderStats(); } catch (e) { console.error('Error in renderHeaderStats:', e); }
+    try { this.renderWordOfTheDay(); } catch (e) { console.error('Error in renderWordOfTheDay:', e); }
+    try { this.populateCategoryFilter(); } catch (e) { console.error('Error in populateCategoryFilter:', e); }
+    try { this.renderVocabGrid(); } catch (e) { console.error('Error in renderVocabGrid:', e); }
+    try { this.bindGlobalEvents(); } catch (e) { console.error('Error in bindGlobalEvents:', e); }
   }
 
   renderGamificationHeader() {
@@ -840,36 +840,6 @@ class GermanApp {
     }
   }
 
-  initArticlesView() {
-    if (!this.articlesTrainer) {
-      this.articlesTrainer = new ArticlesTrainer('#articles-mount', () => this.renderGamificationHeader());
-      this.articlesTrainer.init();
-    }
-  }
-
-  initTimeView() {
-    if (!this.timeNumbersTrainer) {
-      this.timeNumbersTrainer = new TimeNumbersTrainer('#time-mount', () => this.renderGamificationHeader());
-      this.timeNumbersTrainer.init();
-    }
-  }
-
-  initTandemView() {
-    if (!this.aiTandemPartner) {
-      this.aiTandemPartner = new AITandemPartner('#tandem-mount', () => this.renderGamificationHeader());
-      this.aiTandemPartner.init();
-    }
-  }
-
-  initDailyQuest() {
-    if (!this.dailyQuestManager) {
-      this.dailyQuestManager = new DailyQuestManager({
-        onQuestComplete: () => this.renderGamificationHeader(),
-        onNavigate: (view) => this.switchView(view)
-      });
-      this.dailyQuestManager.init();
-    }
-  }
 
   initPWA() {
     if (!this.pwaInstaller) {
