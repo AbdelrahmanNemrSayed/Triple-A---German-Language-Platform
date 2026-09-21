@@ -527,27 +527,29 @@ class GermanApp {
 
   // --- التبديل بين الشاشات الرئيسية الموسعة ---
   switchView(viewName) {
-    this.activeView = viewName;
+    const targetView = (viewName === 'vocabulary' || viewName === 'vocab') ? 'vocab' : viewName;
+    this.activeView = targetView;
     this.closeMobileMoreSheet();
 
     // تحديث أزرار شريط التنقل العلوي
     const navButtons = document.querySelectorAll('.nav-tab-btn');
     navButtons.forEach(btn => {
       const bView = btn.getAttribute('data-view');
-      btn.classList.toggle('active', bView === viewName || (viewName === 'vocabulary' && bView === 'vocab') || (viewName === 'vocab' && bView === 'vocabulary'));
+      const bTarget = (bView === 'vocabulary' || bView === 'vocab') ? 'vocab' : bView;
+      btn.classList.toggle('active', bTarget === targetView);
     });
 
     // تحديث أزرار شريط التنقل السفلي للموبايل
     const mobButtons = document.querySelectorAll('.mobile-nav-item');
     mobButtons.forEach(btn => {
       const bView = btn.getAttribute('data-view');
-      btn.classList.toggle('active', bView === viewName || (viewName === 'vocabulary' && bView === 'vocab') || (viewName === 'vocab' && bView === 'vocabulary'));
+      const bTarget = (bView === 'vocabulary' || bView === 'vocab') ? 'vocab' : bView;
+      btn.classList.toggle('active', bTarget === targetView);
     });
 
     // تحديث عنوان الشاشة في الشريط العلوي (Topbar)
     const viewTitles = {
       vocab: 'مستكشف المفردات الشامل',
-      vocabulary: 'مستكشف المفردات الشامل',
       verbs: 'مصرف الأفعال الألمانية وجداول الأزمنة',
       prepositions: 'الأفعال مع حروف الجر والحالات (Kasus)',
       grammar: 'بنك القواعد الذهبي ومصفوفة الإعراب وحاسبة الصفات',
@@ -569,13 +571,12 @@ class GermanApp {
       tandem: 'شريك المحادثة الألماني وتصحيح القواعد الذكي (AI Tandem)'
     };
     const titleEl = document.getElementById('topbar-view-title');
-    if (titleEl && viewTitles[viewName]) {
-      titleEl.textContent = viewTitles[viewName];
+    if (titleEl && viewTitles[targetView]) {
+      titleEl.textContent = viewTitles[targetView];
     }
 
     const views = {
       vocab: document.getElementById('view-vocabulary'),
-      vocabulary: document.getElementById('view-vocabulary'),
       verbs: document.getElementById('view-verbs'),
       prepositions: document.getElementById('view-prepositions'),
       grammar: document.getElementById('view-grammar'),
@@ -599,48 +600,48 @@ class GermanApp {
 
     Object.keys(views).forEach(key => {
       if (views[key]) {
-        views[key].classList.toggle('hidden', key !== viewName);
+        views[key].classList.toggle('hidden', key !== targetView);
       }
     });
 
     // تهيئة الشاشات عند تفعيلها
-    if (viewName === 'exams') {
+    if (targetView === 'exams') {
       this.initExamsView();
-    } else if (viewName === 'grammar') {
+    } else if (targetView === 'grammar') {
       this.initGrammarView();
-    } else if (viewName === 'compounds') {
+    } else if (targetView === 'compounds') {
       this.initCompoundsView();
-    } else if (viewName === 'radio') {
+    } else if (targetView === 'radio') {
       this.initRadioView();
-    } else if (viewName === 'articles') {
+    } else if (targetView === 'articles') {
       this.initArticlesView();
-    } else if (viewName === 'time') {
+    } else if (targetView === 'time') {
       this.initTimeView();
-    } else if (viewName === 'tandem') {
+    } else if (targetView === 'tandem') {
       this.initTandemView();
-    } else if (viewName === 'career') {
+    } else if (targetView === 'career') {
       this.initCareerView();
-    } else if (viewName === 'dialogues') {
+    } else if (targetView === 'dialogues') {
       this.initDialoguesView();
-    } else if (viewName === 'stories') {
+    } else if (targetView === 'stories') {
       this.initStoriesView();
-    } else if (viewName === 'verbs') {
+    } else if (targetView === 'verbs') {
       this.initVerbsView();
-    } else if (viewName === 'prepositions') {
+    } else if (targetView === 'prepositions') {
       this.initPrepositionsView();
-    } else if (viewName === 'gamification') {
+    } else if (targetView === 'gamification') {
       this.initGamificationView();
-    } else if (viewName === 'living') {
+    } else if (targetView === 'living') {
       this.initLivingView();
-    } else if (viewName === 'builder') {
+    } else if (targetView === 'builder') {
       this.initBuilderView();
-    } else if (viewName === 'speech') {
+    } else if (targetView === 'speech') {
       this.initSpeechView();
-    } else if (viewName === 'emails') {
+    } else if (targetView === 'emails') {
       this.initEmailsView();
-    } else if (viewName === 'flashcards') {
+    } else if (targetView === 'flashcards') {
       this.initFlashcardsView();
-    } else if (viewName === 'quiz') {
+    } else if (targetView === 'quiz') {
       this.initQuizView();
     } else {
       this.renderVocabGrid();
