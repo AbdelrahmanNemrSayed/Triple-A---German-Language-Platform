@@ -5,6 +5,16 @@
 import { audioPlayer } from './audio.js';
 import { Storage } from './storage.js';
 
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[character]);
+}
+
 export const TANDEM_PERSONAS = [
   {
     id: 'persona_lukas',
@@ -243,6 +253,7 @@ export class AITandemPartner {
     if (!text || !text.trim()) return;
 
     const userMsg = text.trim();
+    const rewardProfileId = Storage.getActiveProfile()?.id || 'default';
     const grammarTips = this.analyzeGrammar(userMsg);
 
     // Push user message
@@ -252,12 +263,6 @@ export class AITandemPartner {
       grammarTips,
       timestamp: this.getCurrentTime()
     });
-
-    // Reward XP (+5 per message exchange)
-    try {
-      Storage.addXP(5);
-      if (this.onXPUpdate) this.onXPUpdate();
-    } catch (e) {}
 
     this.render();
 
@@ -273,6 +278,12 @@ export class AITandemPartner {
         translationAr: reply.ar,
         timestamp: this.getCurrentTime()
       });
+      try {
+        const reward = Storage.awardTandemConversationXP(rewardProfileId);
+        if (reward.gained > 0) this.onXPUpdate();
+      } catch (e) {
+        console.error('Could not award conversation XP:', e);
+      }
       this.render();
       this.scrollToBottom();
       audioPlayer.speak(reply.de);
@@ -294,9 +305,9 @@ export class AITandemPartner {
         <!-- Header -->
         <div class="tandem-header">
           <div>
-            <span class="vault-badge"><i class="fa-solid fa-robot"></i> الذكاء الاصطناعي التفاعلي</span>
-            <h2 class="tandem-title">شريك المحادثة الألماني الذكي (AI Tandem)</h2>
-            <p class="tandem-sub">تحدث واكتب بحرية مع شخصيات ألمانية واقعية واحصل على تصحيح فوري لقواعدك ونطقك</p>
+            <span class="vault-badge"><i class="fa-solid fa-comments"></i> تدريب محادثة موجه</span>
+            <h2 class="tandem-title">شريك المحادثة الألماني</h2>
+            <p class="tandem-sub">تدرّب مع شخصيات وسيناريوهات وردود معدّة مسبقًا، واحصل على ملاحظات قواعد أساسية. هذه الميزة لا تتصل بخدمة ذكاء اصطناعي. تكسب 5 XP لكل تبادل مكتمل، بحد أقصى 25 XP يوميًا.</p>
           </div>
 
           <!-- Personas Switcher -->
@@ -331,14 +342,14 @@ export class AITandemPartner {
           </div>
 
           <!-- Messages Stream -->
-          <div class="chat-messages-scroll" id="tandem-chat-messages">
+          <div class="chat-messages-scroll" id="tandem-chat-messages" aria-live="polite" aria-relevant="additions">
             ${this.messages.map(msg => `
               <div class="chat-bubble-wrap ${msg.sender === 'user' ? 'bubble-user' : 'bubble-ai'}">
                 <div class="chat-bubble">
-                  <div class="bubble-content" dir="ltr">${msg.text}</div>
+                  <div class="bubble-content" dir="ltr">${escapeHTML(msg.text)}</div>
                   
                   ${msg.translationAr ? `
-                    <div class="bubble-ar-translation">${msg.translationAr}</div>
+                    <div class="bubble-ar-translation">${escapeHTML(msg.translationAr)}</div>
                   ` : ''}
 
                   <div class="bubble-footer">
@@ -375,6 +386,7 @@ export class AITandemPartner {
                    class="chat-text-input" 
                    id="tandem-user-input" 
                    dir="ltr" 
+                   aria-label="اكتب رسالتك بالألمانية"
                    placeholder="اكتب رسالتك بالألمانية هنا (مثال: Hallo Lukas!)..." />
             <button class="btn-primary btn-tandem-send" id="btn-tandem-send">
               <span>إرسال 🚀</span>

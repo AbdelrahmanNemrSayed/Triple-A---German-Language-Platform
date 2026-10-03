@@ -1,0 +1,3 @@
+assets/vendor/supabase.js -whitespace
+dist/assets/vendor/supabase.js -whitespace
+public/assets/vendor/supabase.js -whitespace

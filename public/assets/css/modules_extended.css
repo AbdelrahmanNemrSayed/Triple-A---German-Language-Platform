@@ -2668,6 +2668,100 @@
   font-size: 0.95rem;
 }
 
+.profile-backup-section {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.profile-backup-heading strong {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.profile-backup-heading p {
+  margin-top: 0.3rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.profile-backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.btn-backup-action {
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  border-radius: 10px;
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--text-primary);
+  padding: 0.6rem 0.85rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-backup-action:hover {
+  background: rgba(14, 165, 233, 0.18);
+}
+
+.btn-backup-import {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.btn-backup-import:hover {
+  background: rgba(16, 185, 129, 0.18);
+}
+
+.profile-backup-status {
+  min-height: 1.3em;
+  margin-top: 0.6rem;
+  color: #059669;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.profile-backup-status.is-error {
+  color: #dc2626;
+}
+
+.profile-cloud-login {
+  margin-top: 0.8rem;
+}
+
+.profile-cloud-account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.profile-cloud-account[hidden],
+.profile-cloud-actions[hidden] {
+  display: none !important;
+}
+
+.profile-cloud-status {
+  min-height: 1.3em;
+  margin-top: 0.6rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.profile-cloud-status.is-error {
+  color: #dc2626;
+}
+
 .avatar-selector-wrap {
   margin-top: 0.85rem;
 }
@@ -7603,5 +7697,585 @@
   }
 }
 
+.learning-hub,
+.curriculum-lesson,
+.assessment-shell {
+  padding: 1.5rem 0 3rem;
+  color: var(--text-primary);
+}
 
+.learning-hub-header {
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border-radius: 24px;
+  background: linear-gradient(130deg, rgba(14, 165, 233, 0.14), rgba(16, 185, 129, 0.1));
+  border: 1px solid var(--border-subtle);
+}
 
+.learning-hub-header h1,
+.assessment-shell h1,
+.curriculum-lesson h1 {
+  margin: 0.35rem 0;
+  color: var(--text-primary);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+}
+
+.learning-hub-header p,
+.level-intro p,
+.mock-exam-callout p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.learning-eyebrow {
+  color: #0284c7;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.placement-banner,
+.mock-exam-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1.2rem 1.35rem;
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.placement-banner strong,
+.mock-exam-callout h2 {
+  color: var(--text-primary);
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.placement-banner p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.learning-primary-btn,
+.learning-secondary-btn,
+.lesson-complete-btn,
+.learning-back-btn {
+  min-height: 42px;
+  border: 0;
+  border-radius: 11px;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.learning-primary-btn {
+  background: linear-gradient(120deg, #0284c7, #059669);
+  color: #fff;
+}
+
+.learning-primary-btn:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.learning-secondary-btn {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  color: var(--text-primary);
+}
+
+.learning-back-btn {
+  margin-bottom: 1rem;
+  background: transparent;
+  color: #0284c7;
+}
+
+.learning-report,
+.curriculum-section {
+  margin-top: 2rem;
+}
+
+.learning-next-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(120deg, rgba(14, 165, 233, 0.1), var(--bg-card));
+}
+
+.learning-next-step h3 {
+  margin: 0.2rem 0;
+  color: var(--text-primary);
+}
+
+.learning-next-step p {
+  margin: 0.35rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.learning-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.learning-section-heading h2,
+.unit-content h3 {
+  margin: 0.2rem 0;
+  color: var(--text-primary);
+  font-weight: 900;
+}
+
+.learning-progress-count {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.skill-progress-grid,
+.placement-score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.skill-progress-card,
+.placement-score-grid > div {
+  padding: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 15px;
+  background: var(--bg-card);
+}
+
+.skill-progress-card span,
+.skill-progress-card strong,
+.skill-progress-card small {
+  display: block;
+}
+
+.skill-progress-card span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.skill-progress-card strong {
+  margin: 0.25rem 0;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.skill-progress-card small {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+}
+
+.skill-progress-track,
+.assessment-progress {
+  height: 7px;
+  margin: 0.55rem 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(100, 116, 139, 0.18);
+}
+
+.skill-progress-track i,
+.assessment-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0ea5e9, #10b981);
+}
+
+.learning-disclaimer {
+  margin: 0.8rem 0;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.curriculum-level-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.curriculum-level-tab {
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.curriculum-level-tab.active {
+  border-color: #0284c7;
+  background: rgba(14, 165, 233, 0.13);
+  color: var(--text-primary);
+}
+
+.level-intro {
+  margin-bottom: 1rem;
+}
+
+.level-intro h3 {
+  margin: 0 0 0.2rem;
+}
+
+.curriculum-units {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.curriculum-unit-card {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  background: var(--bg-card);
+}
+
+.unit-number {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 13px;
+  background: rgba(14, 165, 233, 0.12);
+  color: #0284c7;
+  font-weight: 900;
+}
+
+.unit-content > p,
+.unit-grammar {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.unit-vocab-count,
+.unit-lesson-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.unit-vocab-count span {
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+}
+
+.lesson-launch-btn {
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  background: rgba(14, 165, 233, 0.08);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lesson-launch-btn.is-complete {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.mock-exam-callout h2 {
+  margin: 0.15rem 0;
+}
+
+.assessment-shell {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1.4rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  background: var(--bg-card);
+}
+
+.assessment-skill-tag {
+  margin-top: 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.assessment-prompt {
+  margin: 1.2rem 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.assessment-options,
+.lesson-options {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.assessment-option,
+.lesson-options button {
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  padding: 0.8rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.assessment-option.correct,
+.lesson-options button.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.assessment-option.incorrect,
+.lesson-options button.incorrect {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.assessment-feedback,
+.lesson-feedback {
+  min-height: 1.5rem;
+  margin-top: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.placement-score-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0;
+}
+
+.placement-score-grid > div strong,
+.placement-score-grid > div span {
+  display: block;
+}
+
+.placement-score-grid > div span {
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+}
+
+.curriculum-lesson > h1,
+.curriculum-lesson > .lesson-meaning {
+  text-align: center;
+}
+
+.curriculum-lesson > .lesson-meaning {
+  margin-top: 0;
+  color: var(--text-secondary);
+}
+
+.lesson-example {
+  max-width: 760px;
+  margin: 1rem auto 1.2rem;
+  padding: 1rem;
+  border-radius: 15px;
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.lesson-example button {
+  margin-inline-start: 0.5rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.lesson-example p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
+}
+
+.lesson-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.lesson-skill-card {
+  padding: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  background: var(--bg-card);
+}
+
+.lesson-skill-card h2 {
+  display: inline-block;
+  margin: 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.lesson-skill-card > p {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.curriculum-passage {
+  margin: 0.8rem 0;
+  padding: 0.85rem;
+  border-inline-start: 3px solid #0ea5e9;
+  border-radius: 8px;
+  background: rgba(100, 116, 139, 0.08);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.curriculum-translation {
+  margin: 0.5rem 0 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.curriculum-translation summary {
+  width: fit-content;
+  color: #0284c7;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.curriculum-translation p {
+  margin: 0.45rem 0;
+}
+
+.curriculum-question {
+  display: block;
+  margin: 0.8rem 0 0.55rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.lesson-output-card textarea {
+  min-height: 130px;
+}
+
+.self-review-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.self-review-list legend {
+  padding: 0 0.35rem;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.self-review-list label,
+.self-assessment-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.self-review-list input,
+.self-assessment-check input {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+  accent-color: #0284c7;
+}
+
+.self-assessment-check {
+  margin: 0.8rem 0;
+  color: var(--text-primary);
+}
+
+.speaking-starters {
+  padding: 0 1.25rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.lesson-recording-player audio {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.lesson-skill-card textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.65rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.lesson-complete-btn {
+  margin-inline-start: 0.4rem;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--text-primary);
+}
+
+.lesson-completion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 700px) {
+  .skill-progress-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .placement-banner,
+  .mock-exam-callout,
+  .lesson-completion,
+  .learning-next-step {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .lesson-skill-grid {
+    grid-template-columns: 1fr;
+  }
+  .self-review-list {
+    padding: 0.65rem;
+  }
+  .curriculum-unit-card {
+    grid-template-columns: 1fr;
+  }
+}

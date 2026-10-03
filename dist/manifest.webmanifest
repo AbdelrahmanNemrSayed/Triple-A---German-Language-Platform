@@ -40,6 +40,13 @@
   ],
   "shortcuts": [
     {
+      "name": "خريطة المنهج والتقدم",
+      "short_name": "المنهج",
+      "description": "ابدأ اختبار تحديد المستوى وتابع منهج A1 إلى B1",
+      "url": "/#view-curriculum",
+      "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
       "name": "تحدي der / die / das",
       "short_name": "الأدوات",
       "description": "لعبة وتحدي أدوات التعريف السريع",
@@ -54,9 +61,9 @@
       "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
-      "name": "شريك المحادثة الذكي",
+      "name": "تدريب المحادثة الألمانية",
       "short_name": "المحادثة",
-      "description": "تحدث بالألمانية مع الذكاء الاصطناعي",
+      "description": "تدرّب على محادثات ألمانية موجهة",
       "url": "/#view-tandem",
       "icons": [{ "src": "/assets/images/app_icon_192.png", "sizes": "192x192", "type": "image/png" }]
     },

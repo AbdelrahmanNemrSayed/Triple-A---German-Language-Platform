@@ -1,5 +1,8 @@
-// محاكي امتحانات غوته وتيلك وتوليد الشهادات الرسمية - Goethe & Telc Exam Simulator & Certificate Generator
+// تدريبات امتحانية غير رسمية بمستويات متدرجة
 import { examData } from '../../data/exam_simulator.js';
+import { levelAssessmentQuestions } from '../../data/level_assessments.js';
+import { shuffleQuestionOptions } from './assessment_utils.js';
+import { audioPlayer } from './audio.js';
 import { Storage } from './storage.js';
 
 export class ExamSimulator {
@@ -21,6 +24,16 @@ export class ExamSimulator {
     this.renderSetup();
   }
 
+  getExamData(level) {
+    const original = examData[level];
+    return {
+      ...original,
+      title: `اختبار تدريبي ${level} · نموذج غير رسمي`,
+      durationMinutes: level === 'A1' ? 20 : level === 'A2' ? 25 : 30,
+      sections: [...original.sections, ...levelAssessmentQuestions[level]]
+    };
+  }
+
   renderSetup() {
     this.isExamActive = false;
     this.examFinished = false;
@@ -34,11 +47,11 @@ export class ExamSimulator {
         <!-- Banner -->
         <div class="exam-banner-card">
           <div class="exam-banner-content">
-            <span class="exam-badge">📝 المحاكي الرسمي لامتحانات Goethe & Telc</span>
-            <h1 class="exam-banner-title">محاكي اختبارات اللغة الألمانية والشهادة المعتمدة</h1>
+            <span class="exam-badge">📝 تدريبات على أنماط أسئلة Goethe وTelc</span>
+            <h1 class="exam-banner-title">اختبارات تدريبية متدرجة للمستويات A1–B1</h1>
             <p class="exam-banner-desc">
-              اختبر مستواك الحقيقي بنماذج امتحانات دقيقة تحاكي اختبارات معهد غوته الرسمية لمستويات A1 و A2 و B1.
-              عند اجتياز الاختبار بنسبة 60% فأكثر، ستمنحك المنصة <strong>شهادة إتمام رسمية معتمدة من Triple A PRO</strong> تحمل اسمك ودرجتك وكود التحقق الخاص بك!
+              تدرب على القراءة والمفردات والقواعد والاستماع بنماذج تعليمية محددة الوقت، مع مراجعة الإجابات وشرحها.
+              هذه تدريبات غير رسمية، وليست امتحانات كاملة معتمدة أو بديلاً عن اختبارات Goethe أو telc.
             </p>
           </div>
           <div class="exam-banner-icon" aria-hidden="true">🎖️</div>
@@ -47,7 +60,7 @@ export class ExamSimulator {
         <!-- Level Selector Cards -->
         <div class="exam-levels-grid">
           ${['A1', 'A2', 'B1'].map(lvl => {
-            const data = examData[lvl];
+            const data = this.getExamData(lvl);
             const isSelected = this.currentLevel === lvl;
             return `
               <div class="exam-level-card ${isSelected ? 'selected' : ''}" data-level="${lvl}">
@@ -58,8 +71,8 @@ export class ExamSimulator {
                 <h3 class="exam-lvl-title">${data.title}</h3>
                 <p class="exam-lvl-desc">${data.targetAudience}</p>
                 <div class="exam-meta-pills">
-                  <span>📊 ${data.sections.length} أسئلة شاملة</span>
-                  <span>🎯 حد النجاح: ${data.passScorePercent}%</span>
+                  <span>📊 ${data.sections.length} سؤال تدريبي</span>
+                  <span>🎯 مؤشر تدريب: ${data.passScorePercent}%</span>
                 </div>
                 <button class="btn-select-exam" data-level="${lvl}">
                   <span>${isSelected ? 'محدد حالياً ✅' : 'اختيار هذا المستوى'}</span>
@@ -74,9 +87,9 @@ export class ExamSimulator {
           <div class="exam-student-info">
             <span class="info-avatar">${activeProfile.avatar || '🎓'}</span>
             <div>
-              <strong>اسم المتعلّم المعتمد للشهادة:</strong> ${activeProfile.name}
+              <strong>المتعلّم:</strong> ${activeProfile.name}
               <div style="font-size: 0.85rem; color: var(--text-muted);">
-                تأكد من اختيار الملف الشخصي الصحيح قبل البدء ليتم إصدار الشهادة باسمك.
+                تُحفظ نتائج التدريب في سجل الملف الشخصي النشط.
               </div>
             </div>
           </div>
@@ -85,10 +98,10 @@ export class ExamSimulator {
           </button>
         </div>
 
-        <!-- السجل والشهادات السابقة -->
+        <!-- سجل المحاولات -->
         ${history.length > 0 ? `
           <div class="exam-history-card">
-            <h3 class="history-title">📜 سجل الاختبارات والشهادات المكتسبة لـ (${activeProfile.name}):</h3>
+            <h3 class="history-title">📜 سجل المحاولات التدريبية لـ (${activeProfile.name}):</h3>
             <div class="history-list">
               ${history.map(item => `
                 <div class="history-item ${item.passed ? 'passed' : 'failed'}">
@@ -96,14 +109,9 @@ export class ExamSimulator {
                     <span class="history-badge ${item.level.toLowerCase()}">${item.level}</span>
                     <div>
                       <strong>${item.title}</strong>
-                      <div class="history-date">📅 ${new Date(item.date).toLocaleDateString('ar-EG')} - النتيجة: ${item.scorePercent}% (${item.passed ? 'ناجح ومستحق للشهادة 🎉' : 'لم يجتز'})</div>
+                      <div class="history-date">📅 ${new Date(item.date).toLocaleDateString('ar-EG')} - النتيجة: ${item.scorePercent}% (${item.passed ? 'تجاوز مؤشر التدريب' : 'يُنصح بمراجعة الأخطاء'})</div>
                     </div>
                   </div>
-                  ${item.passed ? `
-                    <button class="btn-view-cert-mini" data-action="view-saved-cert" data-cert-id="${item.id}">
-                      <span>عرض الشهادة 🏅</span>
-                    </button>
-                  ` : ''}
                 </div>
               `).join('')}
             </div>
@@ -125,6 +133,7 @@ export class ExamSimulator {
           this.renderSetup();
         }
       });
+
     });
 
     const startBtn = this.container.querySelector('#btn-start-exam-trigger');
@@ -134,17 +143,6 @@ export class ExamSimulator {
       });
     }
 
-    const certBtns = this.container.querySelectorAll('[data-action="view-saved-cert"]');
-    certBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const certId = btn.getAttribute('data-cert-id');
-        const history = Storage.getExamHistory();
-        const found = history.find(h => h.id === certId);
-        if (found) {
-          this.renderCertificate(found);
-        }
-      });
-    });
   }
 
   startExam(level) {
@@ -153,7 +151,10 @@ export class ExamSimulator {
     this.examFinished = false;
     this.currentIndex = 0;
     this.userAnswers = {};
-    const data = examData[level];
+    const data = this.getExamData(level);
+    data.sections = data.sections.map(question => shuffleQuestionOptions(question));
+    data.sections.sort(() => Math.random() - 0.5);
+    this.currentExam = data;
     this.timeLeftSeconds = data.durationMinutes * 60;
 
     this.renderExamSession();
@@ -189,7 +190,7 @@ export class ExamSimulator {
   }
 
   renderExamSession() {
-    const data = examData[this.currentLevel];
+    const data = this.currentExam || this.getExamData(this.currentLevel);
     const q = data.sections[this.currentIndex];
     const totalQ = data.sections.length;
     const answeredCount = Object.keys(this.userAnswers).length;
@@ -233,6 +234,7 @@ export class ExamSimulator {
               ${q.text}
             </div>
           ` : ''}
+          ${q.audio ? '<button class="btn-primary" data-action="play-exam-audio" type="button">استمع إلى المقطع 🔊</button>' : ''}
 
           <div class="question-main-prompt">
             <h3 class="q-prompt-de" dir="ltr">${q.question}</h3>
@@ -290,6 +292,11 @@ export class ExamSimulator {
       });
     });
 
+    const audioBtn = this.container.querySelector('[data-action="play-exam-audio"]');
+    if (audioBtn) {
+      audioBtn.addEventListener('click', () => audioPlayer.speak(this.currentExam.sections[this.currentIndex].audio, audioBtn));
+    }
+
     const prevBtn = this.container.querySelector('#btn-prev-question');
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
@@ -303,7 +310,7 @@ export class ExamSimulator {
     const nextBtn = this.container.querySelector('#btn-next-question');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        const totalQ = examData[this.currentLevel].sections.length;
+        const totalQ = this.currentExam.sections.length;
         if (this.currentIndex < totalQ - 1) {
           this.currentIndex++;
           this.renderExamSession();
@@ -315,7 +322,7 @@ export class ExamSimulator {
     if (finishBtn) {
       finishBtn.addEventListener('click', () => {
         const answeredCount = Object.keys(this.userAnswers).length;
-        const totalQ = examData[this.currentLevel].sections.length;
+        const totalQ = this.currentExam.sections.length;
         if (answeredCount < totalQ) {
           if (!confirm(`لقد أجبت على ${answeredCount} فقط من أصل ${totalQ} أسئلة. هل أنت متأكد من رغبتك في إنهاء الاختبار وتصحيحه الآن؟`)) {
             return;
@@ -341,12 +348,15 @@ export class ExamSimulator {
     this.isExamActive = false;
     this.examFinished = true;
 
-    const data = examData[this.currentLevel];
+    const data = this.currentExam || this.getExamData(this.currentLevel);
     let correctCount = 0;
 
     data.sections.forEach((q, idx) => {
       if (this.userAnswers[idx] === q.correct) {
         correctCount++;
+      }
+      if (q.skill === 'reading' || q.skill === 'listening') {
+        Storage.recordSkillPractice(q.skill, this.userAnswers[idx] === q.correct);
       }
     });
 
@@ -363,7 +373,7 @@ export class ExamSimulator {
       correctCount,
       scorePercent,
       passed,
-      verificationCode: `AAA-${this.currentLevel}-${Date.now().toString(36).toUpperCase()}`
+      practiceOnly: true
     };
 
     this.examResult = result;
@@ -379,7 +389,7 @@ export class ExamSimulator {
 
   renderResultView() {
     const res = this.examResult;
-    const data = examData[this.currentLevel];
+    const data = this.currentExam || this.getExamData(this.currentLevel);
 
     this.container.innerHTML = `
       <div class="exam-result-wrap">
@@ -390,7 +400,7 @@ export class ExamSimulator {
             ${res.passed ? 'تهانينا! لقد اجتزت الاختبار بنجاح باهر!' : 'محاولة جيدة! استمر في التدريب وستصل بالتأكيد!'}
           </h2>
           <p class="result-banner-subtitle">
-            ${res.passed ? 'حققت المعايير المطلوبة لاجتياز اختبار ' + data.title + ' وأصبحت مؤهلاً لاستلام الشهادة الرسمية.' : 'تحتاج إلى نسبة 60% لاجتياز الاختبار. راجع إجاباتك أدناه وحاول ثانية.'}
+            ${res.passed ? 'تجاوزت مؤشر النجاح الداخلي لهذا التدريب. هذه النتيجة تعليمية ولا تمنح اعتماداً أو شهادة رسمية.' : 'راجع الإجابات والشرح، ثم أعد التدريب عندما تكون مستعداً.'}
           </p>
 
           <div class="result-stats-row">
@@ -409,15 +419,9 @@ export class ExamSimulator {
           </div>
 
           <div class="result-actions-row">
-            ${res.passed ? `
-              <button class="btn-primary btn-show-certificate" id="btn-view-cert">
-                <span>عرض وطباعة الشهادة الرسمية 🎓</span>
-              </button>
-            ` : `
-              <button class="btn-primary" id="btn-retake-exam">
-                <span>إعادة الاختبار الآن 🔄</span>
-              </button>
-            `}
+            <button class="btn-primary" id="btn-retake-exam">
+              <span>إعادة التدريب 🔄</span>
+            </button>
             <button class="btn-outline" id="btn-back-to-setup">
               <span>العودة لقائمة الامتحانات 📋</span>
             </button>
@@ -472,13 +476,6 @@ export class ExamSimulator {
       </div>
     `;
 
-    const certBtn = this.container.querySelector('#btn-view-cert');
-    if (certBtn) {
-      certBtn.addEventListener('click', () => {
-        this.renderCertificate(this.examResult);
-      });
-    }
-
     const retakeBtn = this.container.querySelector('#btn-retake-exam');
     if (retakeBtn) {
       retakeBtn.addEventListener('click', () => {
@@ -494,123 +491,4 @@ export class ExamSimulator {
     }
   }
 
-  renderCertificate(cert) {
-    const formattedDate = new Date(cert.date || Date.now()).toLocaleDateString('ar-EG', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-
-    let gradeDe = 'Sehr gut (ممتاز)';
-    if (cert.scorePercent < 75) gradeDe = 'Befriedigend (جيد)';
-    else if (cert.scorePercent < 90) gradeDe = 'Gut (جيد جداً)';
-
-    this.container.innerHTML = `
-      <div class="certificate-container-wrap">
-        <div class="cert-toolbar no-print">
-          <button class="btn-outline" id="btn-back-from-cert">⬅️ العودة للنتائج</button>
-          <button class="btn-primary" id="btn-print-certificate">
-            <span>🖨️ طباعة وتنزيل الشهادة (PDF)</span>
-          </button>
-        </div>
-
-        <!-- Official Printable Certificate -->
-        <div class="official-certificate" id="official-certificate-printable">
-          <!-- Elegant Border Frame -->
-          <div class="cert-border-inner">
-            <div class="cert-header">
-              <div class="cert-logo-section">
-                <img src="./assets/images/triple_a_logo.jpg" alt="Triple A Logo" class="cert-logo-img">
-                <div class="cert-org-details">
-                  <h2 class="cert-brand-name">Triple A PRO</h2>
-                  <p class="cert-brand-sub">Language Academy & German Career Lab</p>
-                </div>
-              </div>
-              <div class="cert-badge-code">
-                <span class="cert-code-label">VERIFICATION ID:</span>
-                <span class="cert-code-val">${cert.verificationCode}</span>
-              </div>
-            </div>
-
-            <div class="cert-body">
-              <h1 class="cert-main-title">ZERTIFIKAT DER DEUTSCHEN SPRACHE</h1>
-              <p class="cert-sub-title">شهادة اجتياز وإتقان الكفاءة اللغوية</p>
-
-              <div class="cert-divider"></div>
-
-              <p class="cert-text-present">Hiermit wird offiziell bestätigt, dass / يشهد مختبر اللغات بـ Triple A رسمياً بأنّ:</p>
-
-              <h2 class="cert-student-name">${cert.studentName}</h2>
-
-              <p class="cert-achievement-desc">
-                die anspruchsvolle Prüfung für die Niveaustufe <strong>${cert.level} (${cert.title})</strong>
-                gemäß dem Gemeinsamen Europäischen Referenzrahmen für Sprachen (GER)
-                erfolgreich bestanden hat.
-              </p>
-
-              <div class="cert-grade-box">
-                <div class="grade-item">
-                  <span class="g-label">المستوى المعتمد (Niveau):</span>
-                  <strong class="g-val">${cert.level}</strong>
-                </div>
-                <div class="grade-item">
-                  <span class="g-label">النسبة المئوية (Ergebnis):</span>
-                  <strong class="g-val">${cert.scorePercent}%</strong>
-                </div>
-                <div class="grade-item">
-                  <span class="g-label">التقدير العام (Bewertung):</span>
-                  <strong class="g-val">${gradeDe}</strong>
-                </div>
-              </div>
-
-              <!-- Signatures & Stamp Row -->
-              <div class="cert-footer-row">
-                <div class="cert-sign-block">
-                  <div class="sign-line">Dr. Markus Weber</div>
-                  <span class="sign-role">Leiter des Prüfungsausschusses (رئيس لجنة الاختبارات)</span>
-                </div>
-
-                <div class="cert-seal-block">
-                  <div class="gold-embossed-seal">
-                    <div class="seal-inner">
-                      <span>TRIPLE A</span>
-                      <small>OFFICIAL SEAL</small>
-                      <span>★ 2026 ★</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cert-sign-block">
-                  <div class="sign-line">${formattedDate}</div>
-                  <span class="sign-role">Ausstellungsdatum (تاريخ الإصدار والاعتماد)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cert-bottom-bar">
-              <span>Triple A PRO Language Certification • Verified Academic Credential • All Rights Reserved © 2026</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    const printBtn = this.container.querySelector('#btn-print-certificate');
-    if (printBtn) {
-      printBtn.addEventListener('click', () => {
-        window.print();
-      });
-    }
-
-    const backBtn = this.container.querySelector('#btn-back-from-cert');
-    if (backBtn) {
-      backBtn.addEventListener('click', () => {
-        if (this.examResult) {
-          this.renderResultView();
-        } else {
-          this.renderSetup();
-        }
-      });
-    }
-  }
 }

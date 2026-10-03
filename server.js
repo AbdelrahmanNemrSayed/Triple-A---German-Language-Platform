@@ -29,7 +29,10 @@ const server = http.createServer((req, res) => {
   }
 
   const safePath = path.normalize(decodeURIComponent(reqUrl)).replace(/^(\.\.[\/\\])+/, '');
-  const filePath = path.join(__dirname, safePath);
+  const normalizedUrlPath = safePath.replace(/\\/g, '/');
+  const filePath = normalizedUrlPath === '/assets/vendor/supabase.js'
+    ? path.join(__dirname, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js')
+    : path.join(__dirname, safePath);
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {

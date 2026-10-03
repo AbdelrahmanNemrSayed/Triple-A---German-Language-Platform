@@ -34,11 +34,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/style.css?v=2.3">
   <link rel="stylesheet" href="./assets/css/components.css?v=2.2">
   <link rel="stylesheet" href="./assets/css/quiz.css?v=2.2">
   <link rel="stylesheet" href="./assets/css/career.css?v=2.2">
-  <link rel="stylesheet" href="./assets/css/modules_extended.css?v=2.2">
+  <link rel="stylesheet" href="./assets/css/modules_extended.css?v=2.5">
 </head>
 <body>
 
@@ -167,7 +167,7 @@
           <span class="nav-item-icon-box">
             <i class="fa-solid fa-robot" style="font-size: 1.15rem; color: #a855f7;"></i>
           </span>
-          <span class="nav-item-text">شريك المحادثة الذكي</span>
+          <span class="nav-item-text">تدريب المحادثة</span>
           <span class="nav-item-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">AI Chat</span>
         </button>
 
@@ -254,6 +254,12 @@
             </svg>
           </span>
           <span class="nav-item-text">مركز الاختبارات</span>
+        </button>
+
+        <button class="sidebar-nav-item nav-tab-btn" data-view="curriculum" id="tab-curriculum-btn">
+          <span class="nav-item-icon-box"><i class="fa-solid fa-route" style="font-size: 1.15rem; color: #38bdf8;"></i></span>
+          <span class="nav-item-text">خريطة المنهج والتقدم</span>
+          <span class="nav-item-badge">A1-B1</span>
         </button>
 
         <button class="sidebar-nav-item nav-tab-btn" data-view="exams" id="tab-exams-btn">
@@ -402,6 +408,8 @@
                   <strong id="stat-review-count">0</strong>
                 </div>
               </div>
+
+              <div class="review-callout" id="review-callout-panel" aria-live="polite"></div>
             </div>
           </div>
 
@@ -422,7 +430,7 @@
               <h2 class="deck-heading">لوحة التحكم في المفردات الألمانية</h2>
             </div>
             <div class="deck-stats">
-              <span class="deck-count-pill" id="vocab-count-indicator">0 كلمة</span>
+              <span class="deck-count-pill">0 كلمة</span>
             </div>
           </div>
 
@@ -503,7 +511,7 @@
         </div>
 
         <div class="results-meta-bar">
-          <div>الكلمات المعروضة: <span class="vocab-counter-tag" id="vocab-count-indicator">0 كلمة</span></div>
+          <div>الكلمات المعروضة: <span class="vocab-counter-tag" id="vocab-count-indicator" aria-live="polite">0 كلمة</span></div>
           <small>💡 انقر على زر الصوت للاستماع للكلمة أو الجملة بسرعة طبيعية أو بطيئة.</small>
         </div>
 
@@ -617,6 +625,10 @@
       </div>
     </section>
 
+    <section class="view-panel hidden" id="view-curriculum">
+      <div class="container" id="curriculum-mount"></div>
+    </section>
+
     <!-- ==========================================================================
          View 9: مختبر القصص والاستماع التفاعلي (Stories & Hörverstehen Lab)
          ========================================================================== -->
@@ -695,7 +707,7 @@
     </section>
 
     <!-- ==========================================================================
-         View 20: شريك المحادثة الألماني الذكي (German AI Tandem Partner)
+         View 20: تدريب المحادثة الألمانية الموجّه
          ========================================================================== -->
     <section class="view-panel hidden" id="view-tandem">
       <div class="container" id="tandem-mount"></div>
@@ -905,6 +917,11 @@
             <span class="grid-item-name">مستكشف المفردات</span>
             <span class="grid-item-sub">A1 - B1</span>
           </button>
+          <button class="sheet-grid-item nav-tab-btn" data-view="curriculum">
+            <span class="grid-item-icon">🗺️</span>
+            <span class="grid-item-name">خريطة المنهج والتقدم</span>
+            <span class="grid-item-sub">A1 - B1</span>
+          </button>
           <button class="sheet-grid-item nav-tab-btn" data-view="articles">
             <span class="grid-item-icon">🎯</span>
             <span class="grid-item-name">تحدي der/die/das</span>
@@ -953,7 +970,7 @@
           <button class="sheet-grid-item nav-tab-btn" data-view="tandem">
             <span class="grid-item-icon">🤖</span>
             <span class="grid-item-name">شريك المحادثة</span>
-            <span class="grid-item-sub hot">تانديم ذكي</span>
+            <span class="grid-item-sub hot">تدريب موجه</span>
           </button>
           <button class="sheet-grid-item nav-tab-btn" data-view="emails">
             <span class="grid-item-icon">✉️</span>
@@ -1020,6 +1037,7 @@
   <!-- Daily Quest Modal Container -->
   <div id="daily-quest-modal" class="daily-quest-modal-overlay"></div>
 
+  <script src="./assets/vendor/supabase.js"></script>
   <!-- Script Modules -->
   <script type="module" src="./assets/js/app.js"></script>
 </body>

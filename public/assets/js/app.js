@@ -24,6 +24,7 @@ import { TimeNumbersTrainer } from './time_numbers.js';
 import { DailyQuestManager } from './daily_quests.js';
 import { AITandemPartner } from './ai_tandem.js';
 import { PWAInstaller } from './pwa_installer.js';
+import { CurriculumManager } from './curriculum_manager.js';
 
 class GermanApp {
   constructor() {
@@ -59,6 +60,7 @@ class GermanApp {
     this.dailyQuestManager = null;
     this.aiTandemPartner = null;
     this.pwaInstaller = null;
+    this.curriculumManager = null;
 
     this.init();
   }
@@ -76,6 +78,7 @@ class GermanApp {
     try { this.populateCategoryFilter(); } catch (e) { console.error('Error in populateCategoryFilter:', e); }
     try { this.renderVocabGrid(); } catch (e) { console.error('Error in renderVocabGrid:', e); }
     try { this.bindGlobalEvents(); } catch (e) { console.error('Error in bindGlobalEvents:', e); }
+    this.handleHashRoute();
   }
 
   renderGamificationHeader() {
@@ -99,6 +102,9 @@ class GermanApp {
         this.renderVocabGrid();
         if (this.gamificationManager) {
           this.gamificationManager.render();
+        }
+        if (this.curriculumManager) {
+          this.curriculumManager.render();
         }
       }
     });
@@ -223,6 +229,62 @@ class GermanApp {
 
     if (progressBarEl) progressBarEl.style.width = `${percent}%`;
     if (progressTextEl) progressTextEl.textContent = `${percent}% (${mastered.length} من ${totalWords} كلمة)`;
+
+    this.renderReviewCallout();
+  }
+
+  renderReviewCallout() {
+    const review = Storage.getNeedsReview();
+    const panel = document.getElementById('review-callout-panel');
+    if (!panel) return;
+
+    const reviewCount = review.length;
+    const isActive = reviewCount > 0;
+    panel.classList.toggle('is-active', isActive);
+
+    if (isActive) {
+      panel.innerHTML = `
+        <div class="review-callout-header">
+          <span class="review-callout-icon">🔔</span>
+          <div>
+            <strong>لديك ${reviewCount} كلمة تستحق مراجعة الآن</strong>
+            <small>أعد تكرارها قبل أن تنساها.</small>
+          </div>
+        </div>
+        <button type="button" class="btn-review-cta" data-review-action="focus-review">ابدأ المراجعة الآن</button>
+      `;
+    } else {
+      panel.innerHTML = `
+        <div class="review-callout-header">
+          <span class="review-callout-icon">✅</span>
+          <div>
+            <strong>لا توجد مراجعات مستحقة الآن</strong>
+            <small>ستظهر الكلمات التالية تلقائياً عند وصول موعدها.</small>
+          </div>
+        </div>
+      `;
+    }
+
+    const reviewActionBtn = panel.querySelector('[data-review-action="focus-review"]');
+    if (reviewActionBtn) {
+      reviewActionBtn.addEventListener('click', () => {
+        this.currentStatusFilter = 'REVIEW';
+        this.visibleCount = this.itemsPerPage;
+        this.switchView('vocab');
+
+        const statusPills = document.querySelectorAll('.status-pill');
+        statusPills.forEach(pill => {
+          const isSelected = pill.getAttribute('data-status') === 'REVIEW';
+          pill.classList.toggle('active', isSelected);
+        });
+
+        this.renderVocabGrid();
+        const vocabPanel = document.getElementById('view-vocabulary');
+        if (vocabPanel) {
+          vocabPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
   }
 
   // --- كلمة اليوم ---
@@ -526,25 +588,23 @@ class GermanApp {
   }
 
   // --- التبديل بين الشاشات الرئيسية الموسعة ---
-  switchView(viewName) {
+  switchView(viewName, { updateHash = true } = {}) {
     const targetView = (viewName === 'vocabulary' || viewName === 'vocab') ? 'vocab' : viewName;
     this.activeView = targetView;
     this.closeMobileMoreSheet();
 
     // تحديث أزرار شريط التنقل العلوي
-    const navButtons = document.querySelectorAll('.nav-tab-btn');
+    const navButtons = document.querySelectorAll('.nav-tab-btn, .mobile-nav-item');
     navButtons.forEach(btn => {
       const bView = btn.getAttribute('data-view');
       const bTarget = (bView === 'vocabulary' || bView === 'vocab') ? 'vocab' : bView;
-      btn.classList.toggle('active', bTarget === targetView);
-    });
-
-    // تحديث أزرار شريط التنقل السفلي للموبايل
-    const mobButtons = document.querySelectorAll('.mobile-nav-item');
-    mobButtons.forEach(btn => {
-      const bView = btn.getAttribute('data-view');
-      const bTarget = (bView === 'vocabulary' || bView === 'vocab') ? 'vocab' : bView;
-      btn.classList.toggle('active', bTarget === targetView);
+      const isActive = bTarget === targetView;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        btn.setAttribute('aria-current', 'page');
+      } else {
+        btn.removeAttribute('aria-current');
+      }
     });
 
     // تحديث عنوان الشاشة في الشريط العلوي (Topbar)
@@ -563,12 +623,13 @@ class GermanApp {
       radio: 'راديو الألمانية الحية ومحطات الأخبار البطيئة',
       flashcards: 'بطاقات الاستذكار التفاعلية (3D)',
       quiz: 'مركز الاختبارات والتقييم السريع',
-      exams: 'محاكي امتحانات Goethe & Telc والشهادة المعتمدة',
+      curriculum: 'خريطة منهج A1–B1 وتقرير التقدم',
+      exams: 'اختبارات تدريبية للمستويات A1–B1',
       gamification: 'مركز الألعاب والتحديات والستريك اليومي',
       living: 'دليل الحياة والمعيشة في ألمانيا (Leben & Alltag)',
       articles: 'تحدي أدوات التعريف السريع (Der, Die, Das Blitz-Trainer)',
       time: 'مدرب قراءة الأرقام والساعة الألمانية (Uhrzeit & Zahlen)',
-      tandem: 'شريك المحادثة الألماني وتصحيح القواعد الذكي (AI Tandem)'
+      tandem: 'تدريب المحادثة الألمانية الموجّه'
     };
     const titleEl = document.getElementById('topbar-view-title');
     if (titleEl && viewTitles[targetView]) {
@@ -590,6 +651,7 @@ class GermanApp {
       radio: document.getElementById('view-radio'),
       flashcards: document.getElementById('view-flashcards'),
       quiz: document.getElementById('view-quiz'),
+      curriculum: document.getElementById('view-curriculum'),
       exams: document.getElementById('view-exams'),
       gamification: document.getElementById('view-gamification'),
       living: document.getElementById('view-living'),
@@ -604,8 +666,16 @@ class GermanApp {
       }
     });
 
+    if (updateHash && window.history?.replaceState) {
+      const routeUrl = new URL(window.location.href);
+      routeUrl.hash = targetView === 'vocab' ? 'view-vocabulary' : `view-${targetView}`;
+      window.history.replaceState(window.history.state, '', routeUrl);
+    }
+
     // تهيئة الشاشات عند تفعيلها
-    if (targetView === 'exams') {
+    if (targetView === 'curriculum') {
+      this.initCurriculumView();
+    } else if (targetView === 'exams') {
       this.initExamsView();
     } else if (targetView === 'grammar') {
       this.initGrammarView();
@@ -686,6 +756,22 @@ class GermanApp {
       questBtn.addEventListener('click', () => {
         this.dailyQuestManager.openModal();
       });
+    }
+  }
+
+  handleHashRoute() {
+    if (window.location.hash === '#quest') {
+      this.dailyQuestManager?.openQuestModal();
+      return;
+    }
+
+    const match = window.location.hash.match(/^#view-([a-z-]+)$/);
+    if (!match) return;
+
+    const targetView = match[1] === 'vocabulary' ? 'vocab' : match[1];
+    const viewId = targetView === 'vocab' ? 'view-vocabulary' : `view-${targetView}`;
+    if (document.getElementById(viewId)) {
+      this.switchView(targetView, { updateHash: false });
     }
   }
 
@@ -817,6 +903,18 @@ class GermanApp {
       this.examSimulator = new ExamSimulator('exams-mount');
     } else {
       this.examSimulator.renderSetup();
+    }
+  }
+
+  initCurriculumView() {
+    const mount = document.getElementById('curriculum-mount');
+    if (!mount) return;
+    if (!this.curriculumManager) {
+      this.curriculumManager = new CurriculumManager(mount, {
+        navigate: (view) => this.switchView(view)
+      });
+    } else {
+      this.curriculumManager.render();
     }
   }
 
@@ -953,6 +1051,7 @@ class GermanApp {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       });
+      window.addEventListener('hashchange', () => this.handleHashRoute());
     });
 
     // أزرار اختيار المستوى (A1, A2, B1, الكل)

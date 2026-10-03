@@ -20,6 +20,13 @@ function copyRecursive(src, dest) {
   }
 }
 
+function copyBrowserDependencies(dest) {
+  const vendorPath = path.join(dest, 'assets', 'vendor');
+  fs.mkdirSync(vendorPath, { recursive: true });
+  const source = path.join(__dirname, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
+  fs.writeFileSync(path.join(vendorPath, 'supabase.js'), fs.readFileSync(source, 'utf8').trimEnd());
+}
+
 // 1. Target dist directory
 console.log('📦 Building static artifacts for Vercel & PWA...');
 fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true });
@@ -32,6 +39,7 @@ if (fs.existsSync(path.join(__dirname, 'sw.js'))) {
 }
 copyRecursive(path.join(__dirname, 'assets'), path.join(__dirname, 'dist', 'assets'));
 copyRecursive(path.join(__dirname, 'data'), path.join(__dirname, 'dist', 'data'));
+copyBrowserDependencies(path.join(__dirname, 'dist'));
 
 // 2. Also populate public directory just in case
 fs.mkdirSync(path.join(__dirname, 'public'), { recursive: true });
@@ -44,5 +52,6 @@ if (fs.existsSync(path.join(__dirname, 'sw.js'))) {
 }
 copyRecursive(path.join(__dirname, 'assets'), path.join(__dirname, 'public', 'assets'));
 copyRecursive(path.join(__dirname, 'data'), path.join(__dirname, 'public', 'data'));
+copyBrowserDependencies(path.join(__dirname, 'public'));
 
 console.log('✅ Static build complete! Both dist/ and public/ are populated with PWA files.');

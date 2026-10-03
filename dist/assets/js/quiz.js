@@ -230,6 +230,7 @@ export class QuizEngine {
               <span>${q.item.german} - ${q.item.arabic}</span>
             </div>
           `;
+          Storage.recordReviewResult(q.item.id, true);
           Storage.markMastered(q.item.id);
         } else {
           btn.classList.add('incorrect');
@@ -247,6 +248,7 @@ export class QuizEngine {
               <span>${q.item.german} تعني: ${q.item.arabic}</span>
             </div>
           `;
+          Storage.recordReviewResult(q.item.id, false);
           Storage.markNeedsReview(q.item.id);
         }
 
